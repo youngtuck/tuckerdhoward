@@ -232,8 +232,8 @@ body.menu-open .menu-link:nth-child(5) { transition-delay: .25s; }
 }
 .hero-img {
   position: absolute; inset: 0;
-  object-position: center;
-  filter: brightness(.55);
+  object-position: center 30%;
+  filter: brightness(.38) saturate(.7);
   transform: scale(1.05);
   transition: transform 8s ease-out;
 }
