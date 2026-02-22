@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA RTX 60 Series — Tucker Dane Howard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/casestudy.css">
+<style>
+
+/* ── NVIDIA-SPECIFIC OVERRIDES ─────────────────────── */
+/* Subtle green accent layer on top of gold system */
+:root {
+  --nv-green: #76b900;
+  --nv-green-dim: rgba(118,185,0,.08);
+  --nv-green-border: rgba(118,185,0,.2);
+}
+
+/* Hero gets full dark treatment — let the GPU image breathe */
+.cs-hero-img {
+  filter: brightness(.45) saturate(.85);
+  object-position: center 35%;
+}
+
+/* ── CHAPTER SYSTEM ───────────────────────────────── */
+.chapter {
+  padding: 100px 48px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.chapter-label {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+}
+.chapter-num {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--nv-green, var(--accent));
+  margin-bottom: 12px;
+}
+.chapter-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.chapter-sub {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.chapter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── FULL-BLEED SLIDE ─────────────────────────────── */
+.slide-full {
+  width: 100%;
+  border: 1px solid var(--border);
+  display: block;
+  transition: border-color .4s, transform .6s var(--ease);
+}
+.slide-full:hover { border-color: var(--nv-green-border); }
+
+/* Slide with annotation */
+.annotated-slide {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  border: 1px solid var(--border);
+  transition: border-color .4s;
+}
+.annotated-slide:hover { border-color: var(--nv-green-border); }
+.annotated-slide .slide-img { 
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+.annotation-panel {
+  background: var(--surface2);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  border-left: 1px solid var(--border);
+}
+.ann-item {}
+.ann-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--nv-green, var(--accent));
+  margin-bottom: 6px;
+}
+.ann-value {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--text);
+}
+.ann-detail {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* ── SYSTEM SPECS GRID ────────────────────────────── */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.spec-item {
+  background: var(--surface);
+  padding: 28px 24px;
+  transition: background .3s;
+}
+.spec-item:hover { background: var(--surface2); }
+.spec-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--nv-green, var(--accent));
+  margin-bottom: 10px;
+}
+.spec-value {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+/* ── SLIDE PAIR (2-up) ────────────────────────────── */
+.slide-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.slide-pair img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  transition: opacity .4s;
+}
+.slide-pair img:hover { opacity: .9; }
+
+/* ── INSIGHT CALLOUT ──────────────────────────────── */
+.insight {
+  padding: 36px 40px;
+  border-left: 2px solid var(--nv-green, var(--accent));
+  background: var(--surface);
+}
+.insight-text {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text);
+}
+.insight-source {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ── WORKFLOW STEPS ───────────────────────────────── */
+.workflow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.wf-step {
+  background: var(--bg);
+  padding: 28px 20px;
+  position: relative;
+  transition: background .3s;
+}
+.wf-step:hover { background: var(--surface); }
+.wf-num {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--nv-green, var(--accent));
+  margin-bottom: 12px;
+}
+.wf-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.wf-desc {
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+/* ── DISCLAIMER BANNER ────────────────────────────── */
+.disclaimer {
+  padding: 16px 48px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 1100px) {
+  .annotated-slide { grid-template-columns: 1fr; }
+  .annotation-panel { border-left: none; border-top: 1px solid var(--border); }
+}
+@media (max-width: 900px) {
+  .chapter { grid-template-columns: 1fr; gap: 40px; padding: 64px 24px; }
+  .chapter-label { position: static; }
+  .spec-grid { grid-template-columns: 1fr 1fr; }
+  .workflow-steps { grid-template-columns: 1fr 1fr; }
+  .slide-pair { grid-template-columns: 1fr; }
+  .disclaimer { padding: 16px 24px; }
+}
+@media (max-width: 600px) {
+  .spec-grid { grid-template-columns: 1fr; }
+  .workflow-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <span class="preloader-name">NVIDIA RTX 60</span>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="../../index.html" class="nav-logo">TDH</a>
+  <button class="nav-menu-btn" id="menuBtn"><span></span><span></span></button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <nav class="menu-nav">
+    <a href="../../index.html" class="menu-link" data-num="01">Work</a>
+    <a href="../../work/visual-reverb.html" class="menu-link" data-num="02">Visual Reverb</a>
+    <a href="../../about.html" class="menu-link" data-num="03">About</a>
+    <a href="../../music.html" class="menu-link" data-num="04">Music</a>
+    <a href="../../contact.html" class="menu-link" data-num="05">Contact</a>
+  </nav>
+  <div class="menu-footer">
+    <span>tuckerdhoward@gmail.com</span>
+    <span>Pasadena, CA</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="cs-hero">
+  <div class="cs-hero-img-wrap">
+    <img src="../../images/nvidia-hero.png" alt="NVIDIA RTX 60 Series — Neural Performance" class="cs-hero-img">
+    <div class="cs-hero-overlay"></div>
+  </div>
+  <div class="cs-hero-content">
+    <div class="cs-eyebrow">
+      <span class="section-num">02</span>
+      <span>Visual System Study · Brand Direction</span>
+      <span>Independent Work · 2025</span>
+    </div>
+    <h1 class="cs-title">NVIDIA<br><em>RTX 60</em></h1>
+    <p class="cs-subtitle">An independent visual system study exploring scalable marketing for next-generation GPU performance — built on the idea that AI-powered hardware deserves AI-informed design.</p>
+  </div>
+  <div class="cs-hero-scroll">Scroll to explore ↓</div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTEXT STRIP
+══════════════════════════════════════════ -->
+<div class="spec-grid reveal" style="border-top: 1px solid var(--border);">
+  <div class="spec-item">
+    <span class="spec-label">Project Type</span>
+    <span class="spec-value">Independent Visual System Study</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-label">Core Idea</span>
+    <span class="spec-value">Real-time intelligence as visual motif</span>
+  </div>
+  <div class="spec-item">
+    <span class="spec-label">Scope</span>
+    <span class="spec-value">Brand system · Web · Social · Workflow</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 01 — THE QUESTION
+══════════════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="chapter-label">
+    <span class="chapter-num">Chapter 01</span>
+    <h2 class="chapter-title">The Question</h2>
+    <p class="chapter-sub">What does AI-powered hardware actually look like when the design is as intelligent as the product?</p>
+  </div>
+  <div class="chapter-body">
+    <p class="cs-body" style="font-size:16px; line-height:1.85; color:var(--text-mid);">
+      The RTX 60 Series launch presented a fundamental visual problem: how do you communicate the invisible? Neural processing, AI acceleration, real-time intelligence — these are concepts that exist beneath the surface of the hardware. The visual system needed to make that inner intelligence visible.
+    </p>
+    <div class="insight">
+      <p class="insight-text">"Neural light in physical space" — the visual motif that guided every decision in this system, from lighting to layout to social format.</p>
+      <span class="insight-source">Core creative direction · Visual System Study</span>
+    </div>
+    <p class="cs-body" style="color:var(--text-mid);">
+      This is an independent concept study — not a commissioned NVIDIA project. It was built to explore how a designer with deep AI-integration experience would approach a next-generation GPU launch at the scale and ambition level NVIDIA actually operates at.
+    </p>
+
+    <!-- HERO SLIDE — full bleed -->
+    <img src="../../images/nvidia-hero.png" alt="NVIDIA RTX 60 — Neural Performance hero" class="slide-full">
+    <p style="font-size:11px; letter-spacing:.1em; color:var(--text-dim); text-transform:uppercase; margin-top:-16px;">
+      Hero concept — Visual System Study · NVIDIA RTX 60 Series
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 02 — VISUAL LANGUAGE
+══════════════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="chapter-label">
+    <span class="chapter-num">Chapter 02</span>
+    <h2 class="chapter-title">Visual Language System</h2>
+    <p class="chapter-sub">Color · Typography · Lighting — three systems working in unison.</p>
+  </div>
+  <div class="chapter-body">
+    <p class="cs-body" style="color:var(--text-mid);">
+      A strong visual system isn't a mood board — it's a set of decisions that can be applied consistently by any designer on any surface. For RTX 60, three interlocking systems were defined before a single asset was produced.
+    </p>
+
+    <!-- Annotated slide: Visual Language -->
+    <div class="annotated-slide">
+      <img src="../../images/nvidia-visual-language.png" alt="NVIDIA visual language system" class="slide-img">
+      <div class="annotation-panel">
+        <div class="ann-item">
+          <span class="ann-label">Color System</span>
+          <span class="ann-value">Dark matter + neural glow</span>
+          <p class="ann-detail">Charcoal-to-black base with NVIDIA green and electric teal as intelligence signals — color with a function, not just an identity.</p>
+        </div>
+        <div class="ann-item">
+          <span class="ann-label">Typography</span>
+          <span class="ann-value">Neue Haas Grotesque</span>
+          <p class="ann-detail">Engineered precision. Clean geometry reads as technical authority — chosen for how it performs at product-hero scale.</p>
+        </div>
+        <div class="ann-item">
+          <span class="ann-label">Lighting System</span>
+          <span class="ann-value">3-layer approach</span>
+          <p class="ann-detail">Hard rim light for precision. Volumetric glow for intelligence. Directional light flow for implied motion and scale.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="background:var(--border);">
+      <div class="spec-item">
+        <span class="spec-label">Lighting Layer 1</span>
+        <span class="spec-value">Hard rim light<br><small style="font-size:12px;color:var(--text-dim);">Precision, hardware edge definition</small></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Lighting Layer 2</span>
+        <span class="spec-value">Volumetric glow<br><small style="font-size:12px;color:var(--text-dim);">AI intelligence, internal power</small></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Lighting Layer 3</span>
+        <span class="spec-value">Directional flow<br><small style="font-size:12px;color:var(--text-dim);">Motion, particle depth, scale</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 03 — WEB EXPERIENCE
+══════════════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="chapter-label">
+    <span class="chapter-num">Chapter 03</span>
+    <h2 class="chapter-title">Web Experience</h2>
+    <p class="chapter-sub">Designed for clarity, hierarchy, and performance. The product page as a sales instrument.</p>
+  </div>
+  <div class="chapter-body">
+    <p class="cs-body" style="color:var(--text-mid);">
+      The web experience translates the visual language into a purchasable journey. Every hierarchy decision — from the hero to the feature callouts to the secondary CTA — is structured around a single conversion path. Clarity before beauty, always.
+    </p>
+
+    <img src="../../images/nvidia-web.png" alt="NVIDIA RTX 60 web experience" class="slide-full">
+
+    <div class="insight">
+      <p class="insight-text">Real-Time Ray Tracing · AI Acceleration · Next-Gen Performance — three feature pillars chosen not for what they are, but for what they mean to the buyer at the moment they're deciding.</p>
+      <span class="insight-source">Web experience rationale · RTX 60 Visual System</span>
+    </div>
+
+    <div class="spec-grid" style="background:var(--border);">
+      <div class="spec-item">
+        <span class="spec-label">Hero Principle</span>
+        <span class="spec-value">Hardware + atmosphere above the fold</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Feature Hierarchy</span>
+        <span class="spec-value">3-pillar clarity with icon anchors</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">CTA Architecture</span>
+        <span class="spec-value">Primary buy + secondary learn — never competing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 04 — SOCIAL ROLLOUT
+══════════════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="chapter-label">
+    <span class="chapter-num">Chapter 04</span>
+    <h2 class="chapter-title">Social Rollout System</h2>
+    <p class="chapter-sub">Scaled multi-platform deployment while maintaining core identity across every format and ratio.</p>
+  </div>
+  <div class="chapter-body">
+    <p class="cs-body" style="color:var(--text-mid);">
+      A visual system fails if it can only live at full resolution on a desktop. The social rollout system was built to survive compression, cropping, and context-switching — from Instagram square to Twitter card to vertical Story — with the same identity DNA intact on every surface.
+    </p>
+
+    <img src="../../images/nvidia-social.png" alt="NVIDIA social rollout system" class="slide-full">
+
+    <div class="spec-grid" style="background:var(--border);">
+      <div class="spec-item">
+        <span class="spec-label">Instagram</span>
+        <span class="spec-value">Focused dramatic crop<br><small style="font-size:12px;color:var(--text-dim);">Hardware detail at maximum impact</small></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">X / Twitter</span>
+        <span class="spec-value">Concise performance messaging<br><small style="font-size:12px;color:var(--text-dim);">Name + positioning in 2 seconds</small></span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Vertical Stories</span>
+        <span class="spec-value">Motion-driven immersion<br><small style="font-size:12px;color:var(--text-dim);">Full-bleed atmosphere, swipe CTA</small></span>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p class="insight-text">The test for any visual system: strip out the logo. If you can still tell what brand it is, the system is working.</p>
+      <span class="insight-source">Social rollout principle</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 05 — CREATIVE WORKFLOW
+══════════════════════════════════════════ -->
+<section class="chapter reveal">
+  <div class="chapter-label">
+    <span class="chapter-num">Chapter 05</span>
+    <h2 class="chapter-title">Creative Workflow</h2>
+    <p class="chapter-sub">AI-assisted exploration with disciplined system design. How the work was actually built.</p>
+  </div>
+  <div class="chapter-body">
+    <p class="cs-body" style="color:var(--text-mid);">
+      This project was built using an AI-integrated creative workflow — the same methodology developed during 6+ years of working with generative tools. AI handles rapid concept exploration; human judgment handles system coherence, quality control, and final execution.
+    </p>
+
+    <img src="../../images/nvidia-workflow.png" alt="Creative workflow — AI-assisted design process" class="slide-full">
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <span class="wf-num">01</span>
+        <p class="wf-name">Concept Exploration</p>
+        <p class="wf-desc">AI-assisted generation of visual directions. Speed through quantity — find the signal in the noise.</p>
+      </div>
+      <div class="wf-step">
+        <span class="wf-num">02</span>
+        <p class="wf-name">Visual Iteration</p>
+        <p class="wf-desc">Narrow to the strongest direction. Refine lighting, composition, and system coherence through iteration cycles.</p>
+      </div>
+      <div class="wf-step">
+        <span class="wf-num">03</span>
+        <p class="wf-name">Refinement & Composition</p>
+        <p class="wf-desc">Manual quality pass. Typography integration, brand integrity check, and cross-surface consistency review.</p>
+      </div>
+      <div class="wf-step">
+        <span class="wf-num">04</span>
+        <p class="wf-name">System Deployment</p>
+        <p class="wf-desc">Assets scaled across web, social, and print surfaces. System documentation for consistent downstream application.</p>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p class="insight-text">AI-assisted exploration with disciplined system design — the same workflow applied at Meta reviewing ~300 assets per day for global advertising initiatives.</p>
+      <span class="insight-source">Tucker Dane Howard · Creative methodology</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     OUTCOME
+══════════════════════════════════════════ -->
+<section class="cs-outcome reveal">
+  <div class="cs-outcome-inner" style="max-width:900px;">
+    <h2 class="cs-section-title">What This Demonstrates</h2>
+    <p class="cs-body large">
+      The ability to think at the scale of a major tech brand launch — from visual philosophy down to pixel-level social execution — without losing system coherence at any level.
+    </p>
+    <p class="cs-body" style="color:var(--text-mid);">
+      This is the kind of work that typically requires a team of six. The AI-integrated workflow compresses that into a single creative director who can hold the full system in their head simultaneously — which is exactly what the next generation of product marketing requires.
+    </p>
+    <div class="cs-outcome-quote">
+      <blockquote>"Visual system study — exploring scalable marketing for next-generation GPU performance."</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- Disclaimer -->
+<p class="disclaimer">
+  This is an independent visual system study created to explore scalable marketing for next-generation GPU performance. It is not affiliated with, commissioned by, or endorsed by NVIDIA Corporation.
+</p>
+
+<!-- ══════════════════════════════════════════
+     NEXT PROJECT
+══════════════════════════════════════════ -->
+<div class="cs-next">
+  <a href="visual-reverb.html" class="cs-next-link">
+    <span class="cs-next-label">Previous project</span>
+    <span class="cs-next-title">← Visual Reverb</span>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-name">Tucker Dane Howard</span>
+    <span class="footer-copy">©2025</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://open.spotify.com" target="_blank">Spotify</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="mailto:tuckerdhoward@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>
