@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Tucker Dane Howard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.contact-page {
+  min-height: 100vh;
+  padding: calc(var(--nav-h) + 80px) 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  border-bottom: 1px solid var(--border);
+}
+.cp-left h1 {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 100px);
+  font-weight: 300;
+  line-height: .9;
+  letter-spacing: -.02em;
+  margin-top: 40px;
+  animation: fadeUp 1s var(--ease) 1.8s both;
+}
+.cp-left h1 em { font-style: italic; color: var(--accent); }
+.cp-right {
+  padding-top: 80px;
+  animation: fadeUp 1s var(--ease) 2s both;
+}
+.contact-method {
+  display: block;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  transition: background .3s;
+}
+.contact-method:last-child { border-bottom: 1px solid var(--border); }
+.cm-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.cm-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 300;
+  transition: color .3s, letter-spacing .3s;
+}
+.contact-method:hover .cm-value { color: var(--accent); letter-spacing: .01em; }
+@media (max-width: 900px) {
+  .contact-page { grid-template-columns: 1fr; padding: calc(var(--nav-h) + 40px) 24px 48px; }
+  .cp-right { padding-top: 0; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <span class="preloader-name">Tucker Dane Howard</span>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">TDH</a>
+  <button class="nav-menu-btn" id="menuBtn"><span></span><span></span></button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <nav class="menu-nav">
+    <a href="../index.html" class="menu-link" data-num="01">Work</a>
+    <a href="../work/visual-reverb.html" class="menu-link" data-num="02">Visual Reverb</a>
+    <a href="../about.html" class="menu-link" data-num="03">About</a>
+    <a href="../music.html" class="menu-link" data-num="04">Music</a>
+    <a href="../contact.html" class="menu-link" data-num="05">Contact</a>
+  </nav>
+  <div class="menu-footer">
+    <span>tuckerdhoward@gmail.com</span>
+    <span>Pasadena, CA</span>
+  </div>
+</div>
+
+<div class="contact-page">
+  <div class="cp-left">
+    <div class="fp-label">
+      <span class="section-num">Contact</span>
+    </div>
+    <h1>Let's make<br>something<br><em>real.</em></h1>
+  </div>
+  <div class="cp-right">
+    <a href="mailto:tuckerdhoward@gmail.com" class="contact-method">
+      <span class="cm-label">Email</span>
+      <span class="cm-value">tuckerdhoward@gmail.com</span>
+    </a>
+    <a href="tel:4085966339" class="contact-method">
+      <span class="cm-label">Phone</span>
+      <span class="cm-value">(408) 596-6339</span>
+    </a>
+    <a href="https://linkedin.com" target="_blank" class="contact-method">
+      <span class="cm-label">LinkedIn</span>
+      <span class="cm-value">Tucker Dane Howard →</span>
+    </a>
+    <a href="https://open.spotify.com" target="_blank" class="contact-method">
+      <span class="cm-label">Music — Young Tuck</span>
+      <span class="cm-value">Spotify →</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-name">Tucker Dane Howard</span>
+    <span class="footer-copy">©2025</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://open.spotify.com" target="_blank">Spotify</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="mailto:tuckerdhoward@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
