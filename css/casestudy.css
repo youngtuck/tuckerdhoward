@@ -19,7 +19,9 @@
 }
 .cs-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(8,8,7,.1) 0%, rgba(8,8,7,.85) 100%);
+  background:
+    linear-gradient(to right,  rgba(8,8,7,.6) 0%, transparent 22%, transparent 78%, rgba(8,8,7,.6) 100%),
+    linear-gradient(to bottom, rgba(8,8,7,.1) 0%, transparent 18%, transparent 55%, rgba(8,8,7,.96) 100%);
 }
 .cs-hero-content {
   position: relative; z-index: 2;
@@ -120,8 +122,6 @@
 /* FULL IMAGE */
 .cs-full-img {
   position: relative;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
 }
 .cs-full-img img {
   width: 100%;
@@ -131,7 +131,9 @@
 .cs-full-img::before {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(8,8,7,.4) 100%);
+  background:
+    linear-gradient(to right,  rgba(8,8,7,.65) 0%, transparent 18%, transparent 82%, rgba(8,8,7,.65) 100%),
+    linear-gradient(to bottom, rgba(8,8,7,.2) 0%, transparent 16%, transparent 58%, rgba(8,8,7,.88) 100%);
   z-index: 1; pointer-events: none;
 }
 .cs-img-caption {
@@ -206,6 +208,16 @@
   overflow: hidden;
   aspect-ratio: 4/3;
   background: var(--surface);
+  position: relative;
+}
+.cs-grid-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right,  rgba(8,8,7,.6) 0%, transparent 20%, transparent 80%, rgba(8,8,7,.6) 100%),
+    linear-gradient(to bottom, rgba(8,8,7,.15) 0%, transparent 18%, transparent 55%, rgba(8,8,7,.85) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 .cs-grid-img.tall { aspect-ratio: 16/7; }
 .cs-grid-img img {
@@ -316,6 +328,16 @@
   width: 100%;
   overflow: hidden;
   aspect-ratio: 16/6;
+  position: relative;
+}
+.cs-diptych-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right,  rgba(8,8,7,.55) 0%, transparent 16%, transparent 84%, rgba(8,8,7,.55) 100%),
+    linear-gradient(to bottom, rgba(8,8,7,.12) 0%, transparent 15%, transparent 60%, rgba(8,8,7,.82) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 .cs-diptych-img img {
   width: 100%; height: 100%;

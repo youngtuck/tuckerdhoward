@@ -197,17 +197,7 @@
     });
   });
 
-  // ── WORK INDEX HOVER IMAGES ──────────────
-  // Already handled via CSS, but we position them more precisely here
-  document.querySelectorAll('.wi-item').forEach(item => {
-    item.addEventListener('mousemove', e => {
-      const hoverImg = item.querySelector('.wi-hover-img');
-      if (!hoverImg) return;
-      const rect = item.getBoundingClientRect();
-      const y = e.clientY - rect.top;
-      hoverImg.style.top = y + 'px';
-    });
-  });
+  // ── WORK INDEX HOVER IMAGES — removed in favour of CSS accent line ──
 
   // ── TICKER PAUSE ON HOVER ────────────────
   const tickerTrack = document.getElementById('ticker');
