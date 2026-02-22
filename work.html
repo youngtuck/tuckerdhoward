@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Tucker Dane Howard</title>
+<meta name="description" content="Selected work by Tucker Dane Howard — visual design, AI systems, immersive experience, and sound.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+
+/* ═══════════════════════════════════════
+   WORK PAGE
+   A full index of all projects.
+   Clean, no hero image — the work is
+   the thing. Let the list breathe.
+═══════════════════════════════════════ */
+
+/* PAGE HEADER */
+.work-page-header {
+  padding: calc(var(--nav-h) + 80px) 48px 80px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 48px;
+}
+.wph-left {}
+.wph-eyebrow {
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 1.6s forwards;
+}
+.wph-title {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 9vw, 120px);
+  font-weight: 300;
+  line-height: .9;
+  letter-spacing: -.02em;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease) 1.8s forwards;
+}
+.wph-title em { font-style: italic; color: var(--accent); }
+.wph-right {
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 2s forwards;
+}
+.wph-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-mid);
+  max-width: 420px;
+  margin-bottom: 32px;
+}
+.wph-stats {
+  display: flex;
+  gap: 40px;
+}
+.wph-stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.wph-stat-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* FEATURED ROW — Visual Reverb gets its own treatment */
+.work-featured {
+  padding: 80px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.work-featured-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.work-featured-label .section-num { font-size: 11px; letter-spacing: .14em; color: var(--accent); }
+.work-featured-label .section-title {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.work-featured-label .section-title::before {
+  content: '—';
+  margin-right: 8px;
+  color: var(--accent);
+  opacity: .5;
+}
+
+.featured-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color .4s;
+  text-decoration: none;
+  color: inherit;
+}
+.featured-card:hover { border-color: rgba(240,237,228,.18); }
+.featured-card-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--surface);
+}
+.featured-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.8) saturate(.9);
+  transition: transform .8s var(--ease), filter .6s;
+}
+.featured-card:hover .featured-card-img img {
+  transform: scale(1.04);
+  filter: brightness(.9) saturate(1);
+}
+.featured-card-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(8,8,7,.25) 0%, transparent 60%);
+}
+.featured-card-body {
+  padding: 56px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--surface);
+}
+.featured-card-meta {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.featured-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6.5vw, 88px);
+  font-weight: 300;
+  line-height: .92;
+  letter-spacing: -.02em;
+  flex: 1;
+}
+.featured-card-title em { font-style: italic; color: var(--accent); }
+.featured-card-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text-mid);
+  margin: 28px 0;
+  max-width: 360px;
+}
+.featured-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color .3s;
+}
+.featured-card:hover .featured-card-cta { color: var(--accent); }
+.featured-card-arrow { transition: transform .3s var(--ease); }
+.featured-card:hover .featured-card-arrow { transform: translateX(6px); }
+
+/* SELECTED WORK LIST */
+.work-list-section {
+  padding: 0 48px 100px;
+}
+.work-list-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 56px 0 0;
+  margin-bottom: 0;
+}
+
+/* Project rows — same pattern as homepage wi-list but slightly larger */
+.all-work-list { margin-top: 40px; }
+.aw-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  position: relative;
+  transition: background .3s;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+.aw-item:last-child { border-bottom: 1px solid var(--border); }
+.aw-item::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--accent-dim);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s var(--ease);
+}
+.aw-item:hover::before { transform: scaleX(1); }
+.aw-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+}
+.aw-num {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--text-dim);
+  min-width: 28px;
+  transition: color .3s;
+}
+.aw-item:hover .aw-num { color: var(--accent); }
+.aw-text {}
+.aw-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  letter-spacing: -.01em;
+  transition: letter-spacing .4s var(--ease);
+}
+.aw-item:hover .aw-title { letter-spacing: .005em; }
+.aw-sub {
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--text-dim);
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+.aw-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+.aw-tags {
+  display: flex;
+  gap: 8px;
+}
+.aw-tags span {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  transition: border-color .3s, color .3s;
+}
+.aw-item:hover .aw-tags span { border-color: var(--border-mid); }
+.aw-year {
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--text-dim);
+  min-width: 80px;
+  text-align: right;
+}
+.aw-hover-img {
+  position: absolute;
+  right: 120px; top: 50%;
+  transform: translateY(-50%) scale(.9);
+  width: 200px; height: 130px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+  z-index: 10;
+}
+.aw-item:hover .aw-hover-img {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+.aw-hover-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* NDA badge for Meta */
+.aw-nda {
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(200,169,110,.3);
+  padding: 3px 8px;
+  opacity: .7;
+}
+
+/* CONTACT CTA */
+.work-cta {
+  border-top: 1px solid var(--border);
+  padding: 120px 48px;
+  text-align: center;
+  background: var(--surface);
+}
+.wc-eyebrow {
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.wc-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 100px);
+  font-weight: 300;
+  line-height: .92;
+  letter-spacing: -.02em;
+  margin-bottom: 48px;
+}
+.wc-title em { font-style: italic; color: var(--accent); }
+.wc-btn {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--text);
+  padding: 16px 40px;
+  transition: background .3s, color .3s;
+}
+.wc-btn:hover { background: var(--accent); color: var(--bg); }
+
+@media (max-width: 900px) {
+  .work-page-header { grid-template-columns: 1fr; padding: calc(var(--nav-h) + 48px) 24px 48px; }
+  .work-featured { padding: 48px 24px; }
+  .featured-card { grid-template-columns: 1fr; }
+  .featured-card-img { aspect-ratio: 16/9; }
+  .featured-card-body { padding: 36px 28px; }
+  .work-list-section { padding: 0 24px 64px; }
+  .aw-item { grid-template-columns: 1fr; gap: 12px; }
+  .aw-hover-img { display: none; }
+  .aw-right { justify-content: flex-start; }
+  .work-cta { padding: 80px 24px; }
+}
+@media (max-width: 600px) {
+  .wph-title { font-size: clamp(52px, 14vw, 90px); }
+  .featured-card-title { font-size: clamp(44px, 11vw, 72px); }
+  .wph-stats { gap: 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="preloader-inner">
+    <span class="preloader-name">Tucker Dane Howard</span>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">TDH</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+    <span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menu overlay -->
+<div class="menu-overlay" id="menuOverlay">
+  <nav class="menu-nav">
+    <a href="work.html" class="menu-link" data-num="01">Work</a>
+    <a href="work/visual-reverb.html" class="menu-link" data-num="02">Visual Reverb</a>
+    <a href="about.html" class="menu-link" data-num="03">About</a>
+    <a href="music.html" class="menu-link" data-num="04">Music</a>
+    <a href="contact.html" class="menu-link" data-num="05">Contact</a>
+  </nav>
+  <div class="menu-footer">
+    <span>tuckerdhoward@gmail.com</span>
+    <span>Pasadena, CA</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE HEADER
+═══════════════════════════════════════ -->
+<header class="work-page-header">
+  <div class="wph-left">
+    <p class="wph-eyebrow">Selected Work</p>
+    <h1 class="wph-title">The<br><em>Work</em></h1>
+  </div>
+  <div class="wph-right">
+    <p class="wph-desc">Visual systems, AI creative direction, immersive installations, and brand work spanning global campaigns to gallery exhibitions.</p>
+    <div class="wph-stats">
+      <div>
+        <span class="wph-stat-num">45M+</span>
+        <span class="wph-stat-label">Global streams</span>
+      </div>
+      <div>
+        <span class="wph-stat-num">1,500</span>
+        <span class="wph-stat-label">Daily visitors</span>
+      </div>
+      <div>
+        <span class="wph-stat-num">6</span>
+        <span class="wph-stat-label">Years active</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     FEATURED — Visual Reverb
+═══════════════════════════════════════ -->
+<section class="work-featured reveal">
+  <div class="work-featured-label">
+    <span class="section-num">01</span>
+    <span class="section-title">Flagship Work</span>
+  </div>
+
+  <a href="work/visual-reverb.html" class="featured-card">
+    <div class="featured-card-img">
+      <img src="images/vr-gallery-install.jpg" alt="Visual Reverb gallery installation">
+      <div class="featured-card-img-overlay"></div>
+    </div>
+    <div class="featured-card-body">
+      <div class="featured-card-meta">
+        <span>Senior Exhibition · Installation · Album</span>
+        <span>2024 — MOXI Science Museum</span>
+      </div>
+      <h2 class="featured-card-title">Visual<br><em>Reverb</em></h2>
+      <p class="featured-card-desc">Nine original paintings, spectrophotometry, algorithmic translation, and a full instrumental album — exhibited at gallery and extended at MOXI, engaging 1,500+ daily visitors.</p>
+      <div class="featured-card-cta">
+        <span>View case study</span>
+        <span class="featured-card-arrow">→</span>
+      </div>
+    </div>
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ALL WORK LIST
+═══════════════════════════════════════ -->
+<section class="work-list-section">
+  <div class="work-list-header">
+    <span class="section-num">02</span>
+    <span class="section-title">Selected Work</span>
+  </div>
+
+  <div class="all-work-list">
+
+    <a href="work/nvidia.html" class="aw-item reveal">
+      <div class="aw-left">
+        <span class="aw-num">01</span>
+        <div class="aw-text">
+          <h3 class="aw-title">NVIDIA RTX 60 Series</h3>
+          <p class="aw-sub">Visual system study · Brand direction · Social rollout</p>
+        </div>
+      </div>
+      <div class="aw-right">
+        <div class="aw-tags">
+          <span>AI</span><span>Brand</span><span>Tech</span>
+        </div>
+        <span class="aw-year">2025</span>
+      </div>
+      <div class="aw-hover-img">
+        <img src="images/nvidia-thumb.jpg" alt="NVIDIA">
+      </div>
+    </a>
+
+    <a href="work/apple.html" class="aw-item reveal reveal-delay-1">
+      <div class="aw-left">
+        <span class="aw-num">02</span>
+        <div class="aw-text">
+          <h3 class="aw-title">Apple · Logic Pro Concept</h3>
+          <p class="aw-sub">WWDC positioning · Creative direction · Product launch</p>
+        </div>
+      </div>
+      <div class="aw-right">
+        <div class="aw-tags">
+          <span>Direction</span><span>Product</span>
+        </div>
+        <span class="aw-year">2025</span>
+      </div>
+      <div class="aw-hover-img">
+        <img src="images/apple-thumb.jpg" alt="Apple">
+      </div>
+    </a>
+
+    <a href="work/meta-ai.html" class="aw-item reveal reveal-delay-2">
+      <div class="aw-left">
+        <span class="aw-num">03</span>
+        <div class="aw-text">
+          <h3 class="aw-title">Meta — AI Model Design</h3>
+          <p class="aw-sub">Prompt engineering · Visual QA · Global ad production</p>
+        </div>
+      </div>
+      <div class="aw-right">
+        <div class="aw-tags">
+          <span>AI</span><span>Systems</span>
+        </div>
+        <div class="aw-nda">NDA</div>
+        <span class="aw-year">2025–26</span>
+      </div>
+      <div class="aw-hover-img">
+        <img src="images/meta-thumb.jpg" alt="Meta">
+      </div>
+    </a>
+
+    <a href="music.html" class="aw-item reveal reveal-delay-3">
+      <div class="aw-left">
+        <span class="aw-num">04</span>
+        <div class="aw-text">
+          <h3 class="aw-title">Young Tuck · Snow Leopard</h3>
+          <p class="aw-sub">Music · World-building · Visual identity · 45M+ streams</p>
+        </div>
+      </div>
+      <div class="aw-right">
+        <div class="aw-tags">
+          <span>Music</span><span>Identity</span>
+        </div>
+        <span class="aw-year">2017–present</span>
+      </div>
+      <div class="aw-hover-img">
+        <img src="images/youngtuck-thumb.jpg" alt="Young Tuck">
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CTA
+═══════════════════════════════════════ -->
+<section class="work-cta reveal">
+  <p class="wc-eyebrow">Let's work together</p>
+  <h2 class="wc-title">Available for<br><em>select projects.</em></h2>
+  <a href="mailto:tuckerdhoward@gmail.com" class="wc-btn">Get in touch</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <span class="footer-name">Tucker Dane Howard</span>
+    <span class="footer-copy">©2025</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/7iIaFdQa6IeptZFeiQWg48?si=vxg0Gci8SCGDvpIVlgX4wg" target="_blank">Spotify</a>
+    <a href="https://music.apple.com/us/artist/young-tuck/1453296484" target="_blank">Apple Music</a>
+    <a href="https://www.linkedin.com/in/tucker-dane-howard-62709329a/" target="_blank">LinkedIn</a>
+    <a href="mailto:tuckerdhoward@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
