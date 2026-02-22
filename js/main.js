@@ -5,6 +5,18 @@
 (function() {
   'use strict';
 
+  // ── THEME TOGGLE ────────────────────────
+  const themeToggle = document.getElementById('themeToggle');
+
+  // Always start in dark mode — no persistence
+  document.body.classList.remove('light');
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
+  }
+
   // ── CURSOR ──────────────────────────────
   const cursor     = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursor-ring');

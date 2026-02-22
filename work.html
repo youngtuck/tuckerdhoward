@@ -131,7 +131,7 @@
 }
 .featured-card-img-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(8,8,7,.25) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.25) 0%, transparent 60%);
 }
 .featured-card-body {
   padding: 56px 52px;
@@ -376,9 +376,12 @@
 <!-- Navigation -->
 <nav id="nav">
   <a href="index.html" class="nav-logo">TDH</a>
+  <div class="nav-right">
+  <button id="themeToggle" aria-label="Toggle theme">◐</button>
   <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
     <span></span><span></span>
   </button>
+  </div>
 </nav>
 
 <!-- Menu overlay -->
