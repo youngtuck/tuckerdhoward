@@ -1,12 +1,12 @@
 /* about.css */
 .about-hero {
-  padding: calc(var(--nav-h) + 80px) 48px 80px;
+  padding: calc(var(--nav-h) + 60px) 48px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: end;
+  gap: 0 48px;
   border-bottom: 1px solid var(--border);
   min-height: 80vh;
+  align-items: center;
 }
 .ah-label {
   grid-column: 1 / -1;
@@ -14,6 +14,8 @@
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--accent);
+  padding-bottom: 24px;
+  align-self: start;
 }
 .ah-title {
   font-family: var(--font-display);
@@ -22,14 +24,16 @@
   line-height: .92;
   letter-spacing: -.02em;
   animation: fadeUp 1s var(--ease) 1.8s both;
+  align-self: center;
+  padding-bottom: 60px;
 }
 .ah-title em { font-style: italic; color: var(--accent); }
 .ah-portrait {
   overflow: hidden;
   animation: fadeUp 1s var(--ease) 2s both;
   position: relative;
-  flex: 1;
-  min-height: 500px;
+  aspect-ratio: 3/4;
+  width: 100%;
 }
 .ah-portrait::after {
   content: '';
