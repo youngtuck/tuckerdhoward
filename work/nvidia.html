@@ -291,12 +291,153 @@
 <!-- ══════════════════════════════════════════
      HERO
 ══════════════════════════════════════════ -->
-<section class="cs-hero">
-  <div class="cs-hero-img-wrap">
-    <img src="../../images/nvidia-hero.jpg" alt="NVIDIA RTX 60 Series — Neural Performance" class="cs-hero-img" style="object-position: center center; filter: brightness(.5) saturate(.8);">
-    <div class="cs-hero-overlay"></div>
+<section class="cs-hero" style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--bg);">
+
+<style>
+/* NVIDIA Hero — Geometric eye/shield mark */
+.nv-hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(118,185,0,.04) 0%, transparent 65%);
+  animation: nv-breathe 9s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes nv-breathe {
+  0%,100% { opacity:.5; transform:scale(1); }
+  50%      { opacity:1;  transform:scale(1.06); }
+}
+
+.nv-axis {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -56%);
+  width: 300px; height: 300px;
+  opacity: 0;
+  animation: nv-arrive 2.2s var(--ease) 1s forwards;
+}
+@keyframes nv-arrive {
+  from { opacity:0; transform:translate(-50%,-56%) scale(.88); }
+  to   { opacity:1; transform:translate(-50%,-56%) scale(1); }
+}
+
+/* Outer rotating square — NVIDIA's geometric language */
+.nv-square-outer {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(118,185,0,.2);
+  animation: nv-rotate-sq 28s linear infinite;
+  transform-origin: center;
+}
+@keyframes nv-rotate-sq { to { transform: rotate(45deg); } }
+
+/* But we start it at 22.5deg so it looks like a diamond */
+.nv-diamond {
+  position: absolute; inset: 12px;
+  border: 1px solid rgba(118,185,0,.12);
+  transform: rotate(45deg);
+  animation: nv-contra 20s linear infinite;
+}
+@keyframes nv-contra { to { transform: rotate(-315deg); } }
+
+/* Inner circle — the eye */
+.nv-circle {
+  position: absolute; inset: 60px;
+  border: 1px solid rgba(118,185,0,.28);
+  border-radius: 50%;
+  animation: nv-pulse 6s ease-in-out infinite;
+}
+@keyframes nv-pulse {
+  0%,100% { opacity:.28; transform:scale(1); }
+  50%      { opacity:.6;  transform:scale(1.03); }
+}
+
+/* Scanline — GPU render sweep */
+.nv-scanline {
+  position: absolute; inset: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.nv-scanline::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(118,185,0,.5), transparent);
+  animation: nv-scan 3s ease-in-out infinite;
+  top: 0;
+}
+@keyframes nv-scan {
+  0%   { top: 0%;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Corner marks — 4 sharp corners */
+.nv-corner {
+  position: absolute;
+  width: 12px; height: 12px;
+}
+.nv-corner::before, .nv-corner::after {
+  content: '';
+  position: absolute;
+  background: rgba(118,185,0,.5);
+}
+.nv-corner::before { width: 100%; height: 1px; top: 0; left: 0; }
+.nv-corner::after  { width: 1px; height: 100%; top: 0; left: 0; }
+.nv-corner.tl { top: 0; left: 0; }
+.nv-corner.tr { top: 0; right: 0; transform: rotate(90deg); }
+.nv-corner.bl { bottom: 0; left: 0; transform: rotate(-90deg); }
+.nv-corner.br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+/* Center mark */
+.nv-center {
+  position: absolute; width: 7px; height: 7px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: #76b900;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: nv-center-pulse 4s ease-in-out infinite;
+  box-shadow: 0 0 14px rgba(118,185,0,.5);
+}
+@keyframes nv-center-pulse {
+  0%,100% { box-shadow: 0 0 10px rgba(118,185,0,.3); transform:translate(-50%,-50%) scale(1); }
+  50%      { box-shadow: 0 0 24px rgba(118,185,0,.7); transform:translate(-50%,-50%) scale(1.3); }
+}
+
+/* Cross hairs */
+.nv-cross {
+  position: absolute; inset: 0;
+}
+.nv-cross::before { content:''; position:absolute; width:1px; height:100%; left:50%; transform:translateX(-50%); background:linear-gradient(to bottom, transparent, rgba(118,185,0,.07), transparent); }
+.nv-cross::after  { content:''; position:absolute; width:100%; height:1px; top:50%; transform:translateY(-50%); background:linear-gradient(to right, transparent, rgba(118,185,0,.07), transparent); }
+
+/* Bottom fade */
+.cs-hero::after {
+  content: '';
+  position: absolute; left:0; right:0; bottom:0;
+  height: 280px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1;
+}
+</style>
+
+  <div class="nv-hero-bg"></div>
+
+  <div class="nv-axis">
+    <div class="nv-square-outer">
+      <div class="nv-corner tl"></div>
+      <div class="nv-corner tr"></div>
+      <div class="nv-corner bl"></div>
+      <div class="nv-corner br"></div>
+    </div>
+    <div class="nv-diamond"></div>
+    <div class="nv-circle"></div>
+    <div class="nv-scanline"></div>
+    <div class="nv-cross"></div>
+    <div class="nv-center"></div>
   </div>
-  <div class="cs-hero-content">
+
+  <div class="cs-hero-content" style="position:relative;z-index:2;">
     <div class="cs-eyebrow">
       <span class="section-num">02</span>
       <span>Visual System Study · Brand Direction</span>
@@ -305,7 +446,7 @@
     <h1 class="cs-title">NVIDIA<br><em>RTX 60</em></h1>
     <p class="cs-subtitle">An independent visual system study exploring scalable marketing for next-generation GPU performance — built on the idea that AI-powered hardware deserves AI-informed design.</p>
   </div>
-  <div class="cs-hero-scroll">Scroll to explore ↓</div>
+  <div class="cs-hero-scroll" style="position:absolute;bottom:60px;right:48px;z-index:2;">Scroll to explore ↓</div>
 </section>
 
 <!-- ══════════════════════════════════════════
