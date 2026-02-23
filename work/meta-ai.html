@@ -485,11 +485,20 @@
   pointer-events:none; z-index:1;
 }
 
-/* Eyebrow & NDA badge */
-.meta-hero-eyebrow { position:relative; z-index:2; }
-.meta-hero-title   { position:relative; z-index:2; }
-.meta-hero-sub     { position:relative; z-index:2; max-width:55%; }
-.meta-hero-nda     { position:absolute; top:calc(var(--nav-h) + 24px); right:48px; z-index:2; }
+/* Meta hero text sizing — consistent with other heroes */
+.meta-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 100px);
+  font-weight: 300;
+  line-height: .92;
+  letter-spacing: -.02em;
+  max-width: 520px;
+  position: relative; z-index: 2;
+}
+.meta-hero-title em { font-style: italic; color: #1877f2; }
+.meta-hero-eyebrow { position:relative; z-index:2; padding: 0 48px; margin-bottom: 20px; }
+.meta-hero-sub { position:relative; z-index:2; max-width:50%; }
+.meta-hero-nda { position:absolute; top:calc(var(--nav-h) + 24px); right:48px; z-index:2; }
 </style>
 
   <div class="mt-bg"></div>
@@ -511,7 +520,7 @@
     <span>2025–2026</span>
   </div>
 
-  <h1 class="meta-hero-title" style="padding:0 48px 0;">
+  <h1 class="meta-hero-title" style="padding:0 48px;">
     Meta<br>
     <em>AI Model Design</em>
   </h1>

@@ -395,7 +395,21 @@
   background:linear-gradient(to bottom, transparent, var(--bg));
   pointer-events:none; z-index:1;
 }
-.cs-hero-content { max-width:55%; }
+/* Constrain title so it doesn't blow up — matches Snow Leopard hero scale */
+.cs-hero .cs-title {
+  font-size: clamp(52px, 7vw, 100px);
+  line-height: .92;
+  max-width: 520px;
+}
+.cs-hero .cs-hero-content {
+  max-width: 52%;
+  padding: 0 48px 64px;
+}
+@media (max-width: 900px) {
+  .ap-axis { left: 50% !important; top: 38% !important; transform: translate(-50%,-50%) !important; width: 200px !important; height: 220px !important; }
+  .cs-hero .cs-hero-content { max-width: 100%; }
+  .cs-hero .cs-title { font-size: clamp(44px, 10vw, 72px); }
+}
 </style>
 
   <div class="ap-bg"></div>
@@ -422,8 +436,7 @@
     <div class="ap-dot"></div>
   </div>
 
-  <div class="cs-hero-content" style="position:relative;z-index:2;padding:0 48px 64px;">
-    <div class="cs-eyebrow">
+  <div class="cs-hero-content">
       <span class="section-num">03</span>
       <span>Product Vision Study · Creative Direction</span>
       <span>Independent Work · 2025</span>
@@ -431,7 +444,7 @@
     <h1 class="cs-title">Apple · Logic Pro<br><em>Shared Sessions</em></h1>
     <p class="cs-subtitle">Create together. Anywhere. — An independent product vision study exploring what real-time collaborative music production could look like, built natively inside Logic Pro.</p>
   </div>
-  <div class="cs-hero-scroll" style="position:absolute;bottom:60px;right:48px;z-index:2;">Scroll to explore ↓</div>
+  <div class="cs-hero-scroll">Scroll to explore ↓</div>
 </section>
 
 <!-- Context strip -->

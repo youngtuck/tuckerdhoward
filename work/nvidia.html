@@ -382,8 +382,14 @@
   pointer-events:none; z-index:1;
 }
 
-/* Hero text locked to left — z-index above gradient, below nothing */
-.cs-hero-content { padding: 0 48px 64px; max-width: 55%; }
+/* Hero text — constrained left column, title scaled to not overwhelm */
+.cs-hero .cs-hero-content { padding: 0 48px 64px; max-width: 52%; position: relative; z-index: 2; }
+.cs-hero .cs-title { font-size: clamp(52px, 7vw, 100px); line-height: .92; max-width: 520px; }
+@media (max-width: 900px) {
+  .nv-axis { left: 50% !important; top: 36% !important; transform: translate(-50%,-50%) !important; width: 220px !important; height: 220px !important; }
+  .cs-hero .cs-hero-content { max-width: 100%; }
+  .cs-hero .cs-title { font-size: clamp(44px, 10vw, 72px); }
+}
 </style>
 
   <div class="nv-bg"></div>
@@ -401,7 +407,7 @@
     <div class="nv-center"></div>
   </div>
 
-  <div class="cs-hero-content" style="position:relative;z-index:2;">
+  <div class="cs-hero-content">
     <div class="cs-eyebrow">
       <span class="section-num">02</span>
       <span>Visual System Study · Brand Direction</span>
