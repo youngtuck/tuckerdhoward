@@ -291,22 +291,19 @@
 <!-- ══════════════════════════════════════════
      HERO
 ══════════════════════════════════════════ -->
-<section class="cs-hero" style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--bg);">
+<section class="nv-hero" style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--bg); padding: calc(var(--nav-h) + 40px) 48px 72px;">
 
 <style>
 /* ── NVIDIA BRAND SYSTEM ── */
-:root { --nv: #76b900; --nv2: rgba(118,185,0,ALPHA); }
-
-/* Page-wide green accent */
-.cs-hero ~ * { --accent: #76b900; --accent-dim: rgba(118,185,0,.1); }
+.nv-hero ~ * { --accent: #76b900; --accent-dim: rgba(118,185,0,.1); }
 
 .nv-bg {
   position:absolute; inset:0;
-  background: radial-gradient(ellipse 55% 55% at 72% 48%, rgba(118,185,0,.05) 0%, transparent 65%);
+  background: radial-gradient(ellipse 55% 55% at 71% 48%, rgba(118,185,0,.05) 0%, transparent 65%);
   pointer-events:none;
 }
 
-/* Animation — right side, never overlaps text */
+/* Animation — right side, centered vertically */
 .nv-axis {
   position:absolute;
   top:50%; left:71%;
@@ -334,26 +331,17 @@
 @keyframes nv-contra { to { transform:rotate(-315deg); } }
 .nv-circle {
   position:absolute; inset:60px;
-  border:1px solid rgba(118,185,0,.3);
-  border-radius:50%;
+  border:1px solid rgba(118,185,0,.3); border-radius:50%;
   animation:nv-pulse 6s ease-in-out infinite;
 }
-@keyframes nv-pulse {
-  0%,100% { opacity:.3; transform:scale(1); }
-  50%      { opacity:.65; transform:scale(1.03); }
-}
+@keyframes nv-pulse { 0%,100% { opacity:.3; transform:scale(1); } 50% { opacity:.65; transform:scale(1.03); } }
 .nv-scanline { position:absolute; inset:60px; border-radius:50%; overflow:hidden; }
 .nv-scanline::after {
   content:''; position:absolute; left:0; right:0; height:1px; top:0;
   background:linear-gradient(to right, transparent, rgba(118,185,0,.6), transparent);
   animation:nv-scan 3s ease-in-out infinite;
 }
-@keyframes nv-scan {
-  0%   { top:0%;   opacity:0; }
-  8%   { opacity:1; }
-  92%  { opacity:1; }
-  100% { top:100%; opacity:0; }
-}
+@keyframes nv-scan { 0% { top:0%; opacity:0; } 8% { opacity:1; } 92% { opacity:1; } 100% { top:100%; opacity:0; } }
 .nv-corner { position:absolute; width:12px; height:12px; }
 .nv-corner::before,.nv-corner::after { content:''; position:absolute; background:rgba(118,185,0,.55); }
 .nv-corner::before { width:100%; height:1px; top:0; left:0; }
@@ -368,27 +356,55 @@
 .nv-center {
   position:absolute; width:8px; height:8px;
   top:50%; left:50%; transform:translate(-50%,-50%);
-  background:#76b900;
-  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  background:#76b900; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
   animation:nv-dot 4s ease-in-out infinite;
 }
 @keyframes nv-dot {
   0%,100% { box-shadow:0 0 10px rgba(118,185,0,.35); transform:translate(-50%,-50%) scale(1); }
   50%      { box-shadow:0 0 26px rgba(118,185,0,.75); transform:translate(-50%,-50%) scale(1.35); }
 }
-.cs-hero::after {
+
+/* Bottom fade */
+.nv-hero::after {
   content:''; position:absolute; left:0; right:0; bottom:0; height:300px;
   background:linear-gradient(to bottom, transparent, var(--bg));
   pointer-events:none; z-index:1;
 }
 
-/* Hero text — constrained left column, title scaled to not overwhelm */
-.cs-hero .cs-hero-content { padding: 0 48px 64px; max-width: 50%; position: relative; z-index: 2; }
-.cs-hero .cs-title { font-size: clamp(44px, 5.2vw, 80px); line-height: .94; max-width: 480px; letter-spacing: -.02em; }
+/* Text elements — same pattern as meta-hero */
+.nv-eyebrow {
+  display:flex; align-items:center; gap:20px;
+  font-family:var(--font-ui); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-dim);
+  margin-bottom:20px; position:relative; z-index:2;
+  animation: fadeUp 1s var(--ease) 1.8s both;
+}
+.nv-eyebrow .nv-num { color:#76b900; }
+.nv-title {
+  font-family:var(--font-display);
+  font-size: clamp(44px, 5.2vw, 80px);
+  font-weight:300; line-height:.94; letter-spacing:-.02em;
+  color:var(--text); max-width:480px;
+  position:relative; z-index:2;
+  animation: fadeUp 1.2s var(--ease) 2s both;
+}
+.nv-title em { font-style:italic; color:#76b900; }
+.nv-sub {
+  margin-top:20px; font-size:14px; color:var(--text-mid);
+  max-width:480px; line-height:1.7;
+  position:relative; z-index:2;
+  animation: fadeUp 1s var(--ease) 2.2s both;
+}
+.nv-scroll {
+  position:absolute; bottom:28px; right:48px; z-index:2;
+  font-family:var(--font-ui); font-size:11px; letter-spacing:.12em;
+  color:var(--text-dim);
+  animation: fadeUp 1s var(--ease) 2.4s both;
+}
+
 @media (max-width: 900px) {
-  .nv-axis { left: 50% !important; top: 36% !important; transform: translate(-50%,-50%) !important; width: 220px !important; height: 220px !important; }
-  .cs-hero .cs-hero-content { max-width: 100%; }
-  .cs-hero .cs-title { font-size: clamp(40px, 9vw, 64px); }
+  .nv-hero { padding: calc(var(--nav-h) + 24px) 24px 48px; }
+  .nv-axis { left:50% !important; top:36% !important; transform:translate(-50%,-50%) !important; width:220px !important; height:220px !important; }
 }
 </style>
 
@@ -407,16 +423,14 @@
     <div class="nv-center"></div>
   </div>
 
-  <div class="cs-hero-content">
-    <div class="cs-eyebrow">
-      <span class="section-num">02</span>
-      <span>Visual System Study · Brand Direction</span>
-      <span>Independent Work · 2025</span>
-    </div>
-    <h1 class="cs-title">NVIDIA<br><em>RTX 60</em></h1>
-    <p class="cs-subtitle">An independent visual system study exploring scalable marketing for next-generation GPU performance — built on the idea that AI-powered hardware deserves AI-informed design.</p>
+  <div class="nv-eyebrow">
+    <span class="nv-num">02</span>
+    <span>Visual System Study · Brand Direction</span>
+    <span>Independent Work · 2025</span>
   </div>
-  <div class="cs-hero-scroll" style="position:absolute;bottom:60px;right:48px;z-index:2;">Scroll to explore ↓</div>
+  <h1 class="nv-title">NVIDIA<br><em>RTX 60</em></h1>
+  <p class="nv-sub">An independent visual system study exploring scalable marketing for next-generation GPU performance — built on the idea that AI-powered hardware deserves AI-informed design.</p>
+  <span class="nv-scroll">Scroll to explore ↓</span>
 </section>
 
 <!-- ══════════════════════════════════════════
