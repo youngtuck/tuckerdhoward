@@ -25,10 +25,11 @@
 }
 .ah-title em { font-style: italic; color: var(--accent); }
 .ah-portrait {
-  aspect-ratio: 3/4;
   overflow: hidden;
   animation: fadeUp 1s var(--ease) 2s both;
   position: relative;
+  flex: 1;
+  min-height: 500px;
 }
 .ah-portrait::after {
   content: '';
@@ -39,7 +40,7 @@
   pointer-events: none;
   z-index: 1;
 }
-.ah-portrait img { transition: transform .8s var(--ease); filter: grayscale(.15); }
+.ah-portrait img { transition: transform .8s var(--ease); filter: grayscale(.15); width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .ah-portrait:hover img { transform: scale(1.03); }
 
 .bio-section {

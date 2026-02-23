@@ -390,3 +390,19 @@ body.light .cs-diptych-img::after {
     linear-gradient(to bottom, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.05) 0%, transparent 15%, transparent 60%, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.48) 100%);
 }
 
+
+/* ── HERO TEXT — always light regardless of theme (image is always dark) ── */
+.cs-hero-content,
+.cs-title,
+.cs-title em,
+.cs-eyebrow,
+.cs-eyebrow .section-num,
+.cs-subtitle,
+.cs-hero-scroll {
+  color: #F0EDE4 !important;
+}
+.cs-title em,
+.cs-eyebrow .section-num {
+  color: #C8A96E !important;
+}
+
