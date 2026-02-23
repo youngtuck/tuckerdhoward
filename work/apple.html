@@ -395,20 +395,27 @@
   background:linear-gradient(to bottom, transparent, var(--bg));
   pointer-events:none; z-index:1;
 }
-/* Constrain title so it doesn't blow up — matches Snow Leopard hero scale */
+/* Apple hero — title sized to fit left column cleanly */
 .cs-hero .cs-title {
-  font-size: clamp(52px, 7vw, 100px);
-  line-height: .92;
-  max-width: 520px;
+  font-size: clamp(44px, 5.2vw, 80px);
+  line-height: .94;
+  max-width: 480px;
+  letter-spacing: -.02em;
 }
 .cs-hero .cs-hero-content {
-  max-width: 52%;
+  max-width: 50%;
   padding: 0 48px 64px;
+  position: relative;
+  z-index: 2;
 }
+/* Apple accent — warm coral pulled from top of the rainbow */
+.cs-hero ~ * { --accent: #ff6b6b; --accent-dim: rgba(255,107,107,.1); }
+.cs-hero .cs-eyebrow .section-num { color: #ff6b6b; }
+.cs-hero .cs-title em { color: #ff6b6b; }
 @media (max-width: 900px) {
-  .ap-axis { left: 50% !important; top: 38% !important; transform: translate(-50%,-50%) !important; width: 200px !important; height: 220px !important; }
+  .ap-axis { left: 50% !important; top: 36% !important; transform: translate(-50%,-50%) !important; width: 200px !important; height: 220px !important; }
   .cs-hero .cs-hero-content { max-width: 100%; }
-  .cs-hero .cs-title { font-size: clamp(44px, 10vw, 72px); }
+  .cs-hero .cs-title { font-size: clamp(40px, 9vw, 64px); }
 }
 </style>
 
@@ -441,7 +448,7 @@
       <span>Product Vision Study · Creative Direction</span>
       <span>Independent Work · 2025</span>
     </div>
-    <h1 class="cs-title">Apple · Logic Pro<br><em>Shared Sessions</em></h1>
+    <h1 class="cs-title">Apple<br>Logic Pro<br><em>Shared Sessions</em></h1>
     <p class="cs-subtitle">Create together. Anywhere. — An independent product vision study exploring what real-time collaborative music production could look like, built natively inside Logic Pro.</p>
   </div>
   <div class="cs-hero-scroll">Scroll to explore ↓</div>
