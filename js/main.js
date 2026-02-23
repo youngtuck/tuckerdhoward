@@ -8,12 +8,17 @@
   // ── THEME TOGGLE ────────────────────────
   const themeToggle = document.getElementById('themeToggle');
 
-  // Always start in dark mode — no persistence
-  document.body.classList.remove('light');
+  // Restore saved preference (defaults to dark if never set)
+  const savedTheme = localStorage.getItem('tdh-theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light');
+  }
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light');
+      const isLight = document.body.classList.contains('light');
+      localStorage.setItem('tdh-theme', isLight ? 'light' : 'dark');
     });
   }
 

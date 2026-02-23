@@ -361,6 +361,18 @@
   .yt-grid-img:last-child { display: block; }
   .yt-grid-img { aspect-ratio: 3/2; }
 }
+
+/* ── LIGHT MODE — softened music vignettes ── */
+body.light .yt-hero-overlay {
+  background:
+    linear-gradient(to right,  rgba(var(--fade-r),var(--fade-g),var(--fade-b),.3) 0%, transparent 22%, transparent 78%, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.3) 100%),
+    linear-gradient(to bottom, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.04) 0%, transparent 18%, transparent 55%, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.78) 100%);
+}
+body.light .yt-fullshot-overlay {
+  background:
+    linear-gradient(to right,  rgba(var(--fade-r),var(--fade-g),var(--fade-b),.32) 0%, transparent 25%, transparent 75%, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.32) 100%),
+    linear-gradient(to bottom, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.06) 0%, transparent 18%, transparent 58%, rgba(var(--fade-r),var(--fade-g),var(--fade-b),.52) 100%);
+}
 </style>
 </head>
 <body>
