@@ -522,8 +522,8 @@ body.menu-open .menu-link:nth-child(5) { transition-delay: .25s; }
 
 .fp-image-wrap {
   position: relative;
-  aspect-ratio: 4/3;
   overflow: hidden;
+  min-height: 480px;
 }
 .fp-img {
   position: absolute;
@@ -959,7 +959,7 @@ body.light .as-img-wrap::after {
   .featured-project, .work-index { padding-left: 24px; padding-right: 24px; }
 
   .fp-card { grid-template-columns: 1fr; }
-  .fp-image-wrap { aspect-ratio: 16/9; }
+  .fp-image-wrap { min-height: 260px; }
   .fp-content { padding: 36px 28px; }
 
   .wi-item { grid-template-columns: 1fr; gap: 12px; }
