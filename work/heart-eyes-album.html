@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Eyes — Young Tuck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/casestudy.css">
+<style>
+
+/* ═══════════════════════════════════════
+   HEART EYES — TWO BODIES IN ORBIT
+   Hero: two points — warm gold, cool rose —
+   orbiting each other. Close. Far. Close.
+   The physics of first love.
+═══════════════════════════════════════ */
+
+:root {
+  --he-gold: rgba(200,169,110,1);
+  --he-rose: rgba(220,120,120,1);
+  --he-gold-dim: rgba(200,169,110,ALPHA);
+  --he-rose-dim: rgba(220,120,120,ALPHA);
+}
+
+.he-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: var(--bg);
+  padding: calc(var(--nav-h) + 40px) 48px 72px;
+}
+
+.he-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 45% 45% at 62% 48%, rgba(200,169,110,.04) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 35% at 76% 48%, rgba(220,120,120,.04) 0%, transparent 55%);
+  animation: he-bg-shift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes he-bg-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ─── ORBITAL SYSTEM ─── */
+.he-stage {
+  position: absolute;
+  top: 50%; left: 69%;
+  transform: translate(-50%, -52%);
+  width: 300px; height: 300px;
+  opacity: 0;
+  animation: he-arrive 2s ease .7s forwards;
+}
+@keyframes he-arrive {
+  from { opacity: 0; transform: translate(-50%,-52%) scale(.88); }
+  to   { opacity: 1; transform: translate(-50%,-52%) scale(1); }
+}
+
+/* Outer orbit path — faint ellipse they travel along */
+.he-orbit-path {
+  position: absolute;
+  inset: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,169,110,.08);
+}
+
+/* Inner orbit path */
+.he-orbit-inner {
+  position: absolute;
+  inset: 72px;
+  border-radius: 50%;
+  border: 1px solid rgba(220,120,120,.07);
+}
+
+/* The orbital container that rotates — body A rides on this */
+.he-orbit-a {
+  position: absolute; inset: 0;
+  animation: he-orbit-a 8s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes he-orbit-a {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(195deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Body A — warm gold, love/devotion */
+.he-body-a {
+  position: absolute;
+  top: 22px; left: 50%;
+  transform: translateX(-50%);
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--he-gold);
+  box-shadow:
+    0 0 10px 3px rgba(200,169,110,.5),
+    0 0 28px 8px rgba(200,169,110,.15);
+  animation: he-pulse-a 4s ease-in-out infinite;
+}
+@keyframes he-pulse-a {
+  0%,100% { box-shadow: 0 0 8px 2px rgba(200,169,110,.45), 0 0 22px 6px rgba(200,169,110,.12); }
+  50%      { box-shadow: 0 0 14px 4px rgba(200,169,110,.7), 0 0 36px 10px rgba(200,169,110,.2); }
+}
+
+/* Body A trail */
+.he-trail-a {
+  position: absolute;
+  top: 25px; left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(200,169,110,.3), transparent);
+  transform-origin: top center;
+  transform: translateX(-50%) scaleY(1);
+}
+
+/* Body B orbit — counter, offset phase */
+.he-orbit-b {
+  position: absolute; inset: 40px;
+  animation: he-orbit-b 10s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes he-orbit-b {
+  0%   { transform: rotate(180deg); }
+  50%  { transform: rotate(360deg); }
+  100% { transform: rotate(540deg); }
+}
+
+/* Body B — cool rose, ego/hurt */
+.he-body-b {
+  position: absolute;
+  top: -4px; left: 50%;
+  transform: translateX(-50%);
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--he-rose);
+  box-shadow:
+    0 0 8px 2px rgba(220,120,120,.45),
+    0 0 22px 6px rgba(220,120,120,.12);
+  animation: he-pulse-b 5s ease-in-out infinite;
+}
+@keyframes he-pulse-b {
+  0%,100% { box-shadow: 0 0 6px 2px rgba(220,120,120,.4), 0 0 18px 5px rgba(220,120,120,.1); }
+  50%      { box-shadow: 0 0 12px 4px rgba(220,120,120,.65), 0 0 30px 8px rgba(220,120,120,.18); }
+}
+
+/* Body B trail */
+.he-trail-b {
+  position: absolute;
+  top: -1px; left: 50%;
+  width: 1px; height: 46px;
+  background: linear-gradient(to bottom, rgba(220,120,120,.25), transparent);
+  transform: translateX(-50%);
+  transform-origin: top center;
+}
+
+/* Center gravity — dim gold, very subtle */
+.he-center {
+  position: absolute;
+  width: 4px; height: 4px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(200,169,110,.4);
+  border-radius: 50%;
+  box-shadow: 0 0 12px 4px rgba(200,169,110,.1);
+  animation: he-center-pulse 6s ease-in-out infinite;
+}
+@keyframes he-center-pulse {
+  0%,100% { opacity:.4; transform:translate(-50%,-50%) scale(1); }
+  50%      { opacity:.7; transform:translate(-50%,-50%) scale(1.5); }
+}
+
+/* Connecting line — the tension between the two */
+.he-tension {
+  position: absolute; inset: 0;
+  opacity: 0;
+  animation: he-tension-appear 1s ease 3s forwards;
+}
+.he-tension canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+@keyframes he-tension-appear { to { opacity: 1; } }
+
+/* Bottom fade */
+.he-hero::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 320px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none; z-index: 1;
+}
+
+/* Text */
+.he-eyebrow {
+  display: flex; align-items: center; gap: 20px;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 20px; position: relative; z-index: 2;
+  animation: fadeUp 1s var(--ease) 1.8s both;
+}
+.he-eyebrow .he-num { color: var(--accent); }
+.he-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5.2vw, 80px);
+  font-weight: 300; line-height: .94; letter-spacing: -.02em;
+  color: var(--text); max-width: 520px;
+  position: relative; z-index: 2;
+  animation: fadeUp 1.2s var(--ease) 2s both;
+}
+.he-title em { font-style: italic; color: var(--accent); }
+.he-sub {
+  margin-top: 20px; font-size: 14px; color: var(--text-mid);
+  max-width: 480px; line-height: 1.7;
+  position: relative; z-index: 2;
+  animation: fadeUp 1s var(--ease) 2.2s both;
+}
+.he-scroll {
+  position: absolute; bottom: 28px; right: 48px; z-index: 2;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: .12em;
+  color: var(--text-dim);
+  animation: fadeUp 1s var(--ease) 2.4s both;
+}
+
+/* ── COVER + SPECS ── */
+.he-cover-wrap {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 72px; align-items: start;
+  padding: 100px 48px;
+  border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto;
+  width: 100%; box-sizing: border-box;
+}
+.he-cover-img {
+  width: 100%; height: auto;
+  object-fit: contain; display: block;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.he-cover-img.sl-visible { opacity: 1; transform: translateY(0); }
+.he-release-label {
+  font-family: var(--font-ui); font-size: 10px;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 20px; display: block;
+  opacity: 0; transition: opacity 1s ease .1s;
+}
+.he-release-label.sl-visible { opacity: 1; }
+.he-release-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 60px);
+  font-weight: 300; line-height: 1;
+  letter-spacing: -.02em; color: var(--text); margin-bottom: 32px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 1.2s ease .15s, transform 1.2s ease .15s;
+}
+.he-release-title.sl-visible { opacity: 1; transform: translateY(0); }
+.he-release-title em { font-style: italic; color: var(--accent); }
+.he-specs {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--border); margin-bottom: 32px;
+}
+.he-spec {
+  background: var(--bg); padding: 14px 20px;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.he-spec.sl-visible { opacity: 1; transform: translateY(0); }
+.he-spec:nth-child(1){transition-delay:.00s}.he-spec:nth-child(2){transition-delay:.07s}
+.he-spec:nth-child(3){transition-delay:.14s}.he-spec:nth-child(4){transition-delay:.21s}
+.he-spec:nth-child(5){transition-delay:.28s}.he-spec:nth-child(6){transition-delay:.35s}
+.he-spec-label {
+  font-family: var(--font-ui); font-size: 10px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0;
+}
+.he-spec-value {
+  font-family: var(--font-display); font-size: 16px;
+  font-weight: 400; color: var(--text); text-align: right;
+}
+.he-stream-link {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--font-ui); font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text-dim); border: 1px solid var(--border-mid);
+  padding: 14px 28px; text-decoration: none;
+  transition: border-color .3s, color .3s;
+}
+.he-stream-link:hover { border-color: var(--accent); color: var(--accent); }
+.he-stream-line {
+  display: block; width: 20px; height: 1px;
+  background: currentColor; transition: width .4s var(--ease);
+}
+.he-stream-link:hover .he-stream-line { width: 32px; }
+
+/* ── CHAPTERS ── */
+.he-section {
+  padding: 100px 48px;
+  border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto;
+  width: 100%; box-sizing: border-box;
+}
+.he-section-eyebrow {
+  font-family: var(--font-ui); font-size: 10px;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 24px; display: block;
+  opacity: 0; transition: opacity 1s ease;
+}
+.he-section-eyebrow.sl-visible { opacity: 1; }
+.he-section-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300; line-height: 1.05; letter-spacing: -.02em;
+  color: var(--text); margin-bottom: 36px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 1.2s ease .1s, transform 1.2s ease .1s;
+}
+.he-section-headline.sl-visible { opacity: 1; transform: translateY(0); }
+.he-section-headline em { font-style: italic; color: var(--accent); }
+.he-body {
+  font-size: 15px; line-height: 1.9; color: var(--text-mid);
+  max-width: 680px;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 1s ease .2s, transform 1s ease .2s;
+}
+.he-body.sl-visible { opacity: 1; transform: translateY(0); }
+.he-body p { margin-bottom: 20px; }
+.he-body p:last-child { margin-bottom: 0; }
+.he-body em { font-style: italic; color: var(--text); }
+.he-two-col {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 72px; align-items: start;
+}
+.he-col-label {
+  position: sticky; top: calc(var(--nav-h) + 40px);
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.he-col-label.sl-visible { opacity: 1; transform: translateX(0); }
+.he-col-num {
+  font-family: var(--font-ui); font-size: 10px;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 10px;
+}
+.he-col-name {
+  font-family: var(--font-display); font-size: 20px;
+  font-weight: 300; color: var(--text); line-height: 1.25;
+}
+
+/* Lyric pull */
+.he-lyric {
+  margin: 36px 0; padding: 28px 32px;
+  border-left: 1px solid rgba(220,120,120,.5);
+  background: var(--surface);
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity 1s ease .2s, transform 1s ease .2s;
+}
+.he-lyric.sl-visible { opacity: 1; transform: translateX(0); }
+.he-lyric-text {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 18px; line-height: 1.6; color: var(--text);
+  display: block; margin-bottom: 10px;
+}
+.he-lyric-attr {
+  font-family: var(--font-ui); font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); display: block;
+}
+
+/* Emotional states — 3-col cards */
+.he-states {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); margin-top: 36px;
+}
+.he-state {
+  background: var(--bg); padding: 32px 28px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .8s ease, transform .8s ease, background .3s;
+}
+.he-state.sl-visible { opacity: 1; transform: translateY(0); }
+.he-state:nth-child(1){transition-delay:.00s}
+.he-state:nth-child(2){transition-delay:.10s}
+.he-state:nth-child(3){transition-delay:.20s}
+.he-state:hover { background: var(--surface); }
+.he-state-label {
+  font-family: var(--font-ui); font-size: 9px;
+  letter-spacing: .22em; text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+.he-state-label.gold { color: rgba(200,169,110,.8); }
+.he-state-label.rose { color: rgba(220,120,120,.8); }
+.he-state-label.mid  { color: var(--text-dim); }
+.he-state-title {
+  font-family: var(--font-display); font-size: 22px;
+  font-weight: 300; font-style: italic;
+  color: var(--text); display: block; margin-bottom: 12px;
+}
+.he-state-desc {
+  font-size: 13px; line-height: 1.75; color: var(--text-mid);
+}
+
+/* Track spotlights */
+.he-tracks {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--border); margin-top: 36px;
+}
+.he-track {
+  background: var(--bg); padding: 28px 28px;
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 24px; align-items: start;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .8s ease, transform .8s ease, background .3s, padding-left .4s;
+}
+.he-track.sl-visible { opacity: 1; transform: translateY(0); }
+.he-track:nth-child(1){transition-delay:.00s}
+.he-track:nth-child(2){transition-delay:.08s}
+.he-track:nth-child(3){transition-delay:.16s}
+.he-track:nth-child(4){transition-delay:.24s}
+.he-track:hover { background: var(--surface); padding-left: 36px; }
+.he-track-title {
+  font-family: var(--font-display); font-size: 20px;
+  font-weight: 300; font-style: italic; color: var(--text);
+}
+.he-track-role {
+  font-family: var(--font-ui); font-size: 9px;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-top: 4px;
+}
+.he-track-desc {
+  font-size: 13px; line-height: 1.75; color: var(--text-mid);
+}
+
+/* Center quote moment */
+.he-moment {
+  padding: 100px 48px;
+  border-top: 1px solid var(--border);
+  text-align: center; position: relative; overflow: hidden;
+}
+.he-moment::before {
+  content: '♡';
+  position: absolute;
+  font-size: 280px; line-height: 1;
+  color: var(--text); opacity: .018;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none; user-select: none;
+}
+.he-moment-text {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.2vw, 46px);
+  font-weight: 300; font-style: italic; line-height: 1.4;
+  color: var(--text); max-width: 760px; margin: 0 auto 20px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+.he-moment-text.sl-visible { opacity: 1; transform: translateY(0); }
+.he-moment-attr {
+  font-family: var(--font-ui); font-size: 11px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim);
+  opacity: 0; transition: opacity 1s ease .3s;
+}
+.he-moment-attr.sl-visible { opacity: 1; }
+
+/* Closing */
+.he-closing {
+  padding: 160px 48px 120px;
+  border-top: 1px solid var(--border);
+  text-align: center; position: relative; overflow: hidden;
+}
+.he-closing::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 40% at 50% 50%,
+    rgba(200,169,110,.025) 0%, rgba(220,120,120,.015) 50%, transparent 70%);
+  pointer-events: none;
+}
+.he-closing-line {
+  display: block; font-family: var(--font-display); font-weight: 300;
+  color: var(--text); opacity: 0;
+  transition: opacity 1.8s ease, transform 1.8s ease;
+  transform: translateY(10px);
+}
+.he-closing-line.sl-visible { opacity: 1; transform: translateY(0); }
+.he-closing-line.large {
+  font-size: clamp(40px, 6vw, 90px);
+  line-height: .92; letter-spacing: -.025em; margin-bottom: .1em;
+}
+.he-closing-line.large em { font-style: italic; color: var(--accent); }
+.he-closing-line.small {
+  font-family: var(--font-ui); font-size: 11px;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text-dim); margin-top: 48px; transition-delay: .35s;
+}
+
+body.light .he-spec  { background: var(--bg); }
+body.light .he-specs { background: var(--border); }
+body.light .he-state { background: var(--bg); }
+body.light .he-track { background: var(--bg); }
+body.light .he-lyric { background: var(--surface2); }
+
+@media (max-width: 960px) {
+  .he-cover-wrap { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
+  .he-two-col    { grid-template-columns: 1fr; gap: 24px; }
+  .he-col-label  { position: static; }
+  .he-hero       { padding: calc(var(--nav-h) + 24px) 24px 48px; }
+  .he-stage      { left: 50%; top: 36%; width: 240px; height: 240px; }
+  .he-section    { padding: 72px 24px; }
+  .he-states     { grid-template-columns: 1fr; }
+  .he-track      { grid-template-columns: 1fr; gap: 8px; }
+  .he-moment     { padding: 72px 24px; }
+  .he-closing    { padding: 100px 24px 80px; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <span class="preloader-name">Heart Eyes</span>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="../../music.html" class="nav-logo">Young Tuck</a>
+  <div class="nav-right">
+    <button id="themeToggle" aria-label="Toggle theme">◐</button>
+    <button class="nav-menu-btn" id="menuBtn"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <nav class="menu-nav">
+    <a href="../../work.html"    class="menu-link" data-num="01">Work</a>
+    <a href="../../about.html"   class="menu-link" data-num="02">About</a>
+    <a href="../../music.html"   class="menu-link" data-num="03">Music</a>
+    <a href="../../contact.html" class="menu-link" data-num="04">Contact</a>
+  </nav>
+  <div class="menu-footer">
+    <span>tuckerdhoward@gmail.com</span>
+    <span>Pasadena, CA</span>
+  </div>
+</div>
+
+<!-- ═ HERO — TWO BODIES IN ORBIT ═ -->
+<section class="he-hero">
+  <div class="he-bg"></div>
+
+  <div class="he-stage">
+    <div class="he-orbit-path"></div>
+    <div class="he-orbit-inner"></div>
+    <div class="he-center"></div>
+
+    <!-- Body A — warm gold, devotion -->
+    <div class="he-orbit-a">
+      <div class="he-trail-a"></div>
+      <div class="he-body-a"></div>
+    </div>
+
+    <!-- Body B — cool rose, ego/hurt -->
+    <div class="he-orbit-b">
+      <div class="he-trail-b"></div>
+      <div class="he-body-b"></div>
+    </div>
+  </div>
+
+  <div class="he-eyebrow">
+    <span class="he-num">Album · 01</span>
+    <span>Post-Relationship · Hyperpop Era</span>
+    <span>Young Tuck · COVID Era</span>
+  </div>
+  <h1 class="he-title">Heart<br><em>Eyes</em></h1>
+  <p class="he-sub">The first time you say "I love you" changes everything. The first time it breaks you changes you.</p>
+  <span class="he-scroll">Scroll to explore ↓</span>
+</section>
+
+<!-- ═ COVER + SPECS ═ -->
+<div class="he-cover-wrap">
+  <img src="../../images/he-album-cover.jpg" alt="Heart Eyes album cover" class="he-cover-img sl-observe">
+  <div>
+    <span class="he-release-label sl-observe">Post-Relationship · COVID Era</span>
+    <h2 class="he-release-title sl-observe">Love, Ego, and the Sound<br><em>of a First Break</em></h2>
+    <div class="he-specs">
+      <div class="he-spec sl-observe"><span class="he-spec-label">Format</span><span class="he-spec-value">Album</span></div>
+      <div class="he-spec sl-observe"><span class="he-spec-label">Era</span><span class="he-spec-value">Post-Car Keys · COVID</span></div>
+      <div class="he-spec sl-observe"><span class="he-spec-label">Status</span><span class="he-spec-value">Independent</span></div>
+      <div class="he-spec sl-observe"><span class="he-spec-label">Sound</span><span class="he-spec-value">Hyperpop · Glitch-pop · R&B</span></div>
+      <div class="he-spec sl-observe"><span class="he-spec-label">Collaborators</span><span class="he-spec-value">Jayinthecut</span></div>
+      <div class="he-spec sl-observe"><span class="he-spec-label">Influence</span><span class="he-spec-value">Brakence, glaive, ericdoa</span></div>
+    </div>
+    <a href="https://open.spotify.com/artist/7iIaFdQa6IeptZFeiQWg48" target="_blank" class="he-stream-link">
+      <span class="he-stream-line"></span>
+      <span>Stream on Spotify</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═ CHAPTER I — THE MOMENT ═ -->
+<div class="he-section">
+  <div class="he-two-col">
+    <div class="he-col-label sl-observe">
+      <span class="he-col-num">Chapter I</span>
+      <span class="he-col-name">The<br>Moment</span>
+    </div>
+    <div>
+      <span class="he-section-eyebrow sl-observe">Origin</span>
+      <h2 class="he-section-headline sl-observe">A long-distance connection.<br>A formative loss.<br><em>A notes app full of fragments.</em></h2>
+      <div class="he-body sl-observe">
+        <p>The relationship was brief but formative — a long-distance connection formed during an already disorienting time. Saying "I love you" for the first time introduced emotional stakes that had not previously existed in the catalog.</p>
+        <p>When the relationship ended after several months, the absence felt magnified by physical distance and social isolation. With limited outlets for processing grief, the notes app became a repository for thoughts, lyrics, and feelings. Music became translation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER II — SONIC TRANSFORMATION ═ -->
+<div class="he-section">
+  <div class="he-two-col">
+    <div class="he-col-label sl-observe">
+      <span class="he-col-num">Chapter II</span>
+      <span class="he-col-name">Sonic<br>Trans-<br>formation</span>
+    </div>
+    <div>
+      <span class="he-section-eyebrow sl-observe">The Sound</span>
+      <h2 class="he-section-headline sl-observe">The most dramatic stylistic pivot<br><em>in the catalog up to that point.</em></h2>
+      <div class="he-body sl-observe">
+        <p>Heavily influenced by the hyperpop and glitch-pop wave emerging at the time — particularly Brakence's album <em>punk2</em>, which served as a creative catalyst. Unable to replicate these sounds intuitively, the process became investigative: studying stems, sound kits, and production techniques to reverse-engineer the style.</p>
+        <p>The result blends pop songwriting instincts with digitally distorted textures, aggressive vocal processing, and emotionally charged dynamics. glaive, ericdoa, and kurtains shaped the broader aesthetic environment.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER III — EMOTIONAL CORE ═ -->
+<div class="he-section">
+  <div class="he-two-col">
+    <div class="he-col-label sl-observe">
+      <span class="he-col-num">Chapter III</span>
+      <span class="he-col-name">Emotional<br>Core</span>
+    </div>
+    <div>
+      <span class="he-section-eyebrow sl-observe">The Feeling</span>
+      <h2 class="he-section-headline sl-observe">Not purely sad.<br><em>Volatile. Expressive.<br>Defensive. Vulnerable.</em></h2>
+      <div class="he-states">
+        <div class="he-state sl-observe">
+          <span class="he-state-label gold">Devotion</span>
+          <span class="he-state-title">ADORE U</span>
+          <p class="he-state-desc">The album's opening captures romantic idealization at its peak. "I adore you" — chosen deliberately over "I love you" for its weight of admiration.</p>
+        </div>
+        <div class="he-state sl-observe">
+          <span class="he-state-label rose">Hurt</span>
+          <span class="he-state-title">Darkside</span>
+          <p class="he-state-desc">Direct confrontation with collapse. Raw, unfiltered, immediate. Questions without answers. The language of someone still inside the wound.</p>
+        </div>
+        <div class="he-state sl-observe">
+          <span class="he-state-label mid">Ego</span>
+          <span class="he-state-title">Armor</span>
+          <p class="he-state-desc">Bravado punctuates sadness. Assertions of independence function as emotional armor — grief expressed through spectacle rather than quiet introspection.</p>
+        </div>
+      </div>
+      <div class="he-lyric sl-observe" style="margin-top: 32px;">
+        <span class="he-lyric-text">"What did I do to hurt you?<br>I gave you every part of me."</span>
+        <span class="he-lyric-attr">Darkside — direct confrontation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER IV — TRACK SPOTLIGHTS ═ -->
+<div class="he-section">
+  <div class="he-two-col">
+    <div class="he-col-label sl-observe">
+      <span class="he-col-num">Chapter IV</span>
+      <span class="he-col-name">Track<br>Spotlights</span>
+    </div>
+    <div>
+      <span class="he-section-eyebrow sl-observe">Standout Moments</span>
+      <h2 class="he-section-headline sl-observe">Each track a different<br><em>frequency of the same feeling.</em></h2>
+      <div class="he-tracks">
+        <div class="he-track sl-observe">
+          <div>
+            <span class="he-track-title">Love Song</span>
+            <span class="he-track-role">Long-distance memory</span>
+          </div>
+          <p class="he-track-desc">Strips away production entirely. An acoustic reflection on separation — references to driving from Colorado to California are literal. Mountains disappearing in the rearview as a metaphor for love receding into memory.</p>
+        </div>
+        <div class="he-track sl-observe">
+          <div>
+            <span class="he-track-title">Green Tea</span>
+            <span class="he-track-role">Foley experiment</span>
+          </div>
+          <p class="he-track-desc">Percussion constructed entirely from classroom objects — pencil sharpeners, staplers, bells. The first exploration of environmental sound as rhythmic material. A technique that opened new possibilities for all future work.</p>
+        </div>
+        <div class="he-track sl-observe">
+          <div>
+            <span class="he-track-title">Dominoes <em style="font-size:13px;color:var(--text-dim)">ft. Jayinthecut</em></span>
+            <span class="he-track-role">Collaboration</span>
+          </div>
+          <p class="he-track-desc">At the time, Jayinthecut was working at a Domino's restaurant — a detail woven directly into the track's opening dialogue. Stereo-panned drums create a disorienting spatial effect: love cascading beyond control.</p>
+        </div>
+        <div class="he-track sl-observe">
+          <div>
+            <span class="he-track-title">ADORE U</span>
+            <span class="he-track-role">Opening statement</span>
+          </div>
+          <p class="he-track-desc">EDM-leaning structure delivering sincere affection. "Adore" chosen deliberately — it felt more profound and specific than "love," suggesting admiration as well as attachment. The high point before the fall.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER V — VISUAL IDENTITY ═ -->
+<div class="he-section">
+  <div class="he-two-col">
+    <div class="he-col-label sl-observe">
+      <span class="he-col-num">Chapter V</span>
+      <span class="he-col-name">Visual<br>Identity</span>
+    </div>
+    <div>
+      <span class="he-section-eyebrow sl-observe">The Cover</span>
+      <h2 class="he-section-headline sl-observe">Standing at the ocean.<br><em>Separation and openness<br>in the same frame.</em></h2>
+      <div class="he-body sl-observe">
+        <p>The artwork depicts the artist on a beach, gazing toward the ocean — an image communicating distance, reflection, and unresolved emotion without overt symbolism. The sea functions as both barrier and horizon: separation from what is lost, and openness to what lies ahead.</p>
+        <p>Minimal visual treatment allows posture and environment to carry all the meaning.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CENTRAL MOMENT ═ -->
+<div class="he-moment">
+  <p class="he-moment-text sl-observe">"Sometimes the most important work is not what we create after we heal — but what we create <em>while we are still hurting.</em>"</p>
+  <span class="he-moment-attr sl-observe">Heart Eyes · Young Tuck</span>
+</div>
+
+<!-- ═ LEGACY ═ -->
+<div class="he-section">
+  <span class="he-section-eyebrow sl-observe">Legacy</span>
+  <h2 class="he-section-headline sl-observe">First album driven by<br><em>a singular emotional event.</em></h2>
+  <div class="he-body sl-observe">
+    <p>Heart Eyes represents a major evolution in the Young Tuck trajectory. Entry into hyperpop-influenced production. Introduction of foley techniques. Increased narrative specificity. Development of performance-ready standout tracks that remain favorites in live settings years later.</p>
+    <p>It reveals how heartbreak can simultaneously wound and energize — dissolving one identity while forcing another into existence.</p>
+  </div>
+</div>
+
+<!-- ═ CLOSING ═ -->
+<div class="he-closing">
+  <span class="he-closing-line large sl-observe">Volatile.</span>
+  <span class="he-closing-line large sl-observe" style="transition-delay:.12s"><em>Vulnerable.</em></span>
+  <span class="he-closing-line large sl-observe" style="transition-delay:.24s">Human.</span>
+  <span class="he-closing-line small sl-observe" style="transition-delay:.5s">Heart Eyes · Young Tuck</span>
+</div>
+
+<!-- ═ BACK ═ -->
+<div class="cs-next">
+  <a href="../../music.html" class="cs-next-link">
+    <span class="cs-next-label">Young Tuck</span>
+    <span class="cs-next-title">← Back to discography</span>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-name">Tucker Dane Howard</span>
+    <span class="footer-copy">©2025</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/7iIaFdQa6IeptZFeiQWg48?si=vxg0Gci8SCGDvpIVlgX4wg" target="_blank">Spotify</a>
+    <a href="https://music.apple.com/us/artist/young-tuck/1453296484" target="_blank">Apple Music</a>
+    <a href="https://www.linkedin.com/in/tucker-dane-howard-62709329a/" target="_blank">LinkedIn</a>
+    <a href="mailto:tuckerdhoward@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script>
+(function() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('sl-visible'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.sl-observe').forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>
