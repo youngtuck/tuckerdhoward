@@ -462,6 +462,12 @@ body.light .yt-fullshot-overlay {
 
 
 
+<!-- ═ DISCOGRAPHY HEADING ═ -->
+<section class="reveal" style="padding: 100px 48px 0; border-top: 1px solid var(--border);">
+  <p class="yt-cta-eyebrow" style="margin-bottom: 12px;">Full Discography</p>
+  <h2 style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 72px); font-weight: 300; line-height: .95; letter-spacing: -.02em; color: var(--text); max-width: 600px;">Every project.<br><em>Every chapter.</em></h2>
+</section>
+
 <!-- ═ SNOW LEOPARD — Featured Project Card ═ -->
 <section class="yt-snow-leopard reveal" style="padding: 80px 48px; border-top: 1px solid var(--border);">
   <p class="yt-cta-eyebrow" style="margin-bottom: 32px;">Featured Project</p>
@@ -543,6 +549,207 @@ body.light .yt-fullshot-overlay {
 }
 @media (max-width: 900px) {
   .yt-snow-leopard { padding: 60px 24px !important; }
+}
+</style>
+
+<!-- ═ YOUNG TUCK EP CARD ═ -->
+<section class="reveal" style="padding: 0 48px 80px; max-width: 1296px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+  <a href="../work/young-tuck-ep.html" class="fp-card" style="max-width: 1200px; margin: 0 auto; display: grid;">
+    <div class="fp-image-wrap" style="background: var(--surface); display: flex; align-items: center; justify-content: center;">
+      <!-- Signal animation — expanding rings -->
+      <div class="ytep-card-signal">
+        <div class="ytep-cs-ring-4"></div>
+        <div class="ytep-cs-ring-3"></div>
+        <div class="ytep-cs-ring-2"></div>
+        <div class="ytep-cs-ring-1"></div>
+        <div class="ytep-cs-pulse"></div>
+        <div class="ytep-cs-origin"></div>
+      </div>
+    </div>
+    <div class="fp-image-overlay"></div>
+    <div class="fp-content">
+      <div class="fp-meta">
+        <span>Origin EP · Self-produced · Independent</span>
+        <span>2017 — Young Tuck</span>
+      </div>
+      <div>
+        <h2 class="fp-title">Young Tuck<br><em>EP</em></h2>
+        <p class="fp-desc">The first body of work. Made with a laptop, curiosity, and no expectation — the sound of a door opening for the very first time.</p>
+      </div>
+      <div class="fp-cta">
+        <span>Read the story</span>
+        <span class="fp-arrow">→</span>
+      </div>
+    </div>
+  </a>
+</section>
+
+<style>
+/* EP Card signal animation */
+.ytep-card-signal {
+  position: relative; width: 180px; height: 180px;
+}
+.ytep-cs-origin {
+  position: absolute; width: 5px; height: 5px;
+  background: var(--accent); border-radius: 50%;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: ytep-cs-origin-pulse 3s ease-in-out infinite;
+  box-shadow: 0 0 16px rgba(200,169,110,.5); z-index: 3;
+}
+@keyframes ytep-cs-origin-pulse {
+  0%,100% { box-shadow: 0 0 6px rgba(200,169,110,.3); transform: translate(-50%,-50%) scale(1); }
+  50%      { box-shadow: 0 0 22px rgba(200,169,110,.7); transform: translate(-50%,-50%) scale(1.7); }
+}
+.ytep-cs-ring-1 { position: absolute; inset: 62px; border-radius: 50%; border: 1px solid rgba(200,169,110,.5); animation: ytep-cs-expand 1s ease .2s both, ytep-cs-breathe 5s ease-in-out 1.2s infinite; }
+.ytep-cs-ring-2 { position: absolute; inset: 40px; border-radius: 50%; border: 1px solid rgba(200,169,110,.28); animation: ytep-cs-expand 1s ease .5s both, ytep-cs-breathe 6s ease-in-out 1.5s infinite; }
+.ytep-cs-ring-3 { position: absolute; inset: 14px; border-radius: 50%; border: 1px solid rgba(200,169,110,.14); animation: ytep-cs-expand 1s ease .8s both, ytep-cs-breathe 7s ease-in-out 1.8s infinite; }
+.ytep-cs-ring-4 { position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(200,169,110,.05); animation: ytep-cs-expand 1.2s ease 1.1s both; }
+.ytep-cs-pulse  { position: absolute; inset: 62px; border-radius: 50%; border: 1px solid rgba(200,169,110,.45); animation: ytep-cs-pulse-out 4s ease-in-out 2s infinite; }
+@keyframes ytep-cs-expand  { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes ytep-cs-breathe { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.03); } }
+@keyframes ytep-cs-pulse-out { 0% { transform: scale(1); opacity: .45; } 100% { transform: scale(2.4); opacity: 0; } }
+</style>
+
+<!-- ═ DISCOGRAPHY GRID — remaining projects ═ -->
+<section class="reveal" style="padding: 0 48px 120px; border-top: 1px solid var(--border);">
+  <p class="yt-cta-eyebrow" style="margin-bottom: 48px; padding-top: 72px;">More Projects</p>
+  <div class="yt-disc-grid">
+
+    <!-- Car Keys EP -->
+    <a href="#" class="yt-disc-item yt-disc-coming-soon">
+      <div class="yt-disc-art yt-disc-placeholder">
+        <span class="yt-disc-placeholder-text">Car Keys</span>
+      </div>
+      <div class="yt-disc-info">
+        <span class="yt-disc-label">EP</span>
+        <h3 class="yt-disc-title">Car Keys</h3>
+        <span class="yt-disc-status">Coming soon</span>
+      </div>
+    </a>
+
+    <!-- Heart Eyes -->
+    <a href="#" class="yt-disc-item yt-disc-coming-soon">
+      <div class="yt-disc-art yt-disc-placeholder">
+        <span class="yt-disc-placeholder-text">Heart Eyes</span>
+      </div>
+      <div class="yt-disc-info">
+        <span class="yt-disc-label">Album</span>
+        <h3 class="yt-disc-title">Heart Eyes</h3>
+        <span class="yt-disc-status">Coming soon</span>
+      </div>
+    </a>
+
+    <!-- Tuck and Friends -->
+    <a href="#" class="yt-disc-item yt-disc-coming-soon">
+      <div class="yt-disc-art yt-disc-placeholder">
+        <span class="yt-disc-placeholder-text">T&F</span>
+      </div>
+      <div class="yt-disc-info">
+        <span class="yt-disc-label">Album</span>
+        <h3 class="yt-disc-title">Tuck and Friends</h3>
+        <span class="yt-disc-status">Coming soon</span>
+      </div>
+    </a>
+
+    <!-- Tuck and Friends 2 -->
+    <a href="#" class="yt-disc-item yt-disc-coming-soon">
+      <div class="yt-disc-art yt-disc-placeholder">
+        <span class="yt-disc-placeholder-text">T&F 2</span>
+      </div>
+      <div class="yt-disc-info">
+        <span class="yt-disc-label">Album</span>
+        <h3 class="yt-disc-title">Tuck and Friends 2</h3>
+        <span class="yt-disc-status">Coming soon</span>
+      </div>
+    </a>
+
+    <!-- Soul Ties -->
+    <a href="#" class="yt-disc-item yt-disc-coming-soon">
+      <div class="yt-disc-art yt-disc-placeholder">
+        <span class="yt-disc-placeholder-text">Soul Ties</span>
+      </div>
+      <div class="yt-disc-info">
+        <span class="yt-disc-label">Single</span>
+        <h3 class="yt-disc-title">Soul Ties <em>ft. Koi</em></h3>
+        <span class="yt-disc-status">Coming soon</span>
+      </div>
+    </a>
+
+    <!-- Bones -->
+    <a href="#" class="yt-disc-item yt-disc-coming-soon">
+      <div class="yt-disc-art yt-disc-placeholder">
+        <span class="yt-disc-placeholder-text">Bones</span>
+      </div>
+      <div class="yt-disc-info">
+        <span class="yt-disc-label">Single</span>
+        <h3 class="yt-disc-title">Bones</h3>
+        <span class="yt-disc-status">Coming soon</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<style>
+.yt-disc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  max-width: 1200px;
+}
+.yt-disc-item {
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  cursor: pointer;
+  transition: background .3s;
+  text-decoration: none; color: inherit;
+}
+.yt-disc-item:hover { background: var(--surface); }
+.yt-disc-art {
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+.yt-disc-placeholder {
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+}
+.yt-disc-placeholder-text {
+  font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 32px);
+  font-weight: 300; font-style: italic;
+  color: var(--text-dim); opacity: .4;
+  letter-spacing: -.01em;
+}
+.yt-disc-info {
+  padding: 20px 24px 28px;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.yt-disc-label {
+  font-family: var(--font-ui); font-size: 9px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); display: block;
+}
+.yt-disc-title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 300; line-height: 1.1;
+  color: var(--text);
+}
+.yt-disc-title em { font-style: italic; color: var(--text-dim); }
+.yt-disc-status {
+  font-family: var(--font-ui); font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text-dim); opacity: .5;
+}
+.yt-disc-coming-soon { opacity: .65; }
+.yt-disc-coming-soon:hover { opacity: 1; }
+@media (max-width: 900px) {
+  .yt-disc-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .yt-disc-grid { grid-template-columns: 1fr; }
 }
 </style>
 
