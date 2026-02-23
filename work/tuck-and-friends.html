@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuck and Friends — Young Tuck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/casestudy.css">
+<style>
+
+/* ═══════════════════════════════════════
+   TUCK AND FRIENDS — THE CONSTELLATION
+   Hero: nodes appear one by one,
+   then connect with faint lines.
+   A social graph forming in real time.
+   Community as visual physics.
+═══════════════════════════════════════ */
+
+.tnf-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: var(--bg);
+  padding: calc(var(--nav-h) + 40px) 48px 72px;
+}
+
+.tnf-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 55% 55% at 69% 48%,
+    rgba(200,169,110,.035) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* The canvas for the constellation */
+.tnf-stage {
+  position: absolute;
+  top: 50%; left: 69%;
+  transform: translate(-50%, -52%);
+  width: 320px; height: 320px;
+  opacity: 0;
+  animation: tnf-arrive 1.8s ease .6s forwards;
+}
+@keyframes tnf-arrive {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Canvas fills the stage */
+.tnf-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+
+/* Bottom fade */
+.tnf-hero::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 320px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none; z-index: 1;
+}
+
+/* Text */
+.tnf-eyebrow {
+  display: flex; align-items: center; gap: 20px;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 20px; position: relative; z-index: 2;
+  animation: fadeUp 1s var(--ease) 1.8s both;
+}
+.tnf-eyebrow .tnf-num { color: var(--accent); }
+.tnf-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5.2vw, 80px);
+  font-weight: 300; line-height: .94; letter-spacing: -.02em;
+  color: var(--text); max-width: 520px;
+  position: relative; z-index: 2;
+  animation: fadeUp 1.2s var(--ease) 2s both;
+}
+.tnf-title em { font-style: italic; color: var(--accent); }
+.tnf-sub {
+  margin-top: 20px; font-size: 14px; color: var(--text-mid);
+  max-width: 480px; line-height: 1.7;
+  position: relative; z-index: 2;
+  animation: fadeUp 1s var(--ease) 2.2s both;
+}
+.tnf-scroll {
+  position: absolute; bottom: 28px; right: 48px; z-index: 2;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: .12em;
+  color: var(--text-dim);
+  animation: fadeUp 1s var(--ease) 2.4s both;
+}
+
+/* ── COVER + SPECS ── */
+.tnf-cover-wrap {
+  display: grid; grid-template-columns: 340px 1fr;
+  gap: 72px; align-items: start;
+  padding: 100px 48px; border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box;
+}
+.tnf-cover-img {
+  width: 100%; height: auto; object-fit: contain; display: block;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.tnf-cover-img.sl-visible { opacity: 1; transform: translateY(0); }
+
+.tnf-release-label {
+  font-family: var(--font-ui); font-size: 10px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block;
+  opacity: 0; transition: opacity 1s ease .1s;
+}
+.tnf-release-label.sl-visible { opacity: 1; }
+.tnf-release-title {
+  font-family: var(--font-display); font-size: clamp(36px, 4vw, 60px);
+  font-weight: 300; line-height: 1; letter-spacing: -.02em; color: var(--text); margin-bottom: 32px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 1.2s ease .15s, transform 1.2s ease .15s;
+}
+.tnf-release-title.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-release-title em { font-style: italic; color: var(--accent); }
+.tnf-specs { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-bottom: 32px; }
+.tnf-spec {
+  background: var(--bg); padding: 14px 20px;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  opacity: 0; transform: translateY(8px); transition: opacity .8s ease, transform .8s ease;
+}
+.tnf-spec.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-spec:nth-child(1){transition-delay:.00s}.tnf-spec:nth-child(2){transition-delay:.07s}
+.tnf-spec:nth-child(3){transition-delay:.14s}.tnf-spec:nth-child(4){transition-delay:.21s}
+.tnf-spec:nth-child(5){transition-delay:.28s}
+.tnf-spec-label { font-family: var(--font-ui); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0; }
+.tnf-spec-value { font-family: var(--font-display); font-size: 16px; font-weight: 400; color: var(--text); text-align: right; }
+.tnf-stream-link {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text-dim); border: 1px solid var(--border-mid); padding: 14px 28px; text-decoration: none;
+  transition: border-color .3s, color .3s;
+}
+.tnf-stream-link:hover { border-color: var(--accent); color: var(--accent); }
+.tnf-stream-line { display: block; width: 20px; height: 1px; background: currentColor; transition: width .4s var(--ease); }
+.tnf-stream-link:hover .tnf-stream-line { width: 32px; }
+
+/* ── CHAPTERS ── */
+.tnf-section {
+  padding: 100px 48px; border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box;
+}
+.tnf-section-eyebrow {
+  font-family: var(--font-ui); font-size: 10px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 24px; display: block;
+  opacity: 0; transition: opacity 1s ease;
+}
+.tnf-section-eyebrow.sl-visible { opacity: 1; }
+.tnf-section-headline {
+  font-family: var(--font-display); font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300; line-height: 1.05; letter-spacing: -.02em; color: var(--text); margin-bottom: 36px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 1.2s ease .1s, transform 1.2s ease .1s;
+}
+.tnf-section-headline.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-section-headline em { font-style: italic; color: var(--accent); }
+.tnf-body {
+  font-size: 15px; line-height: 1.9; color: var(--text-mid); max-width: 680px;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 1s ease .2s, transform 1s ease .2s;
+}
+.tnf-body.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-body p { margin-bottom: 20px; }
+.tnf-body p:last-child { margin-bottom: 0; }
+.tnf-body em { font-style: italic; color: var(--text); }
+.tnf-two-col { display: grid; grid-template-columns: 200px 1fr; gap: 72px; align-items: start; }
+.tnf-col-label {
+  position: sticky; top: calc(var(--nav-h) + 40px);
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.tnf-col-label.sl-visible { opacity: 1; transform: translateX(0); }
+.tnf-col-num { font-family: var(--font-ui); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 10px; }
+.tnf-col-name { font-family: var(--font-display); font-size: 20px; font-weight: 300; color: var(--text); line-height: 1.25; }
+
+/* Workflow steps */
+.tnf-workflow {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--border); margin-top: 32px;
+}
+.tnf-step {
+  background: var(--bg); padding: 20px 28px;
+  display: flex; align-items: baseline; gap: 20px;
+  opacity: 0; transform: translateX(16px);
+  transition: opacity .8s ease, transform .8s ease, background .3s, padding-left .4s;
+}
+.tnf-step.sl-visible { opacity: 1; transform: translateX(0); }
+.tnf-step:nth-child(1){transition-delay:.00s}.tnf-step:nth-child(2){transition-delay:.07s}
+.tnf-step:nth-child(3){transition-delay:.14s}.tnf-step:nth-child(4){transition-delay:.21s}
+.tnf-step:nth-child(5){transition-delay:.28s}
+.tnf-step:hover { background: var(--surface); padding-left: 36px; }
+.tnf-step-num { font-family: var(--font-display); font-style: italic; font-size: 13px; color: var(--accent); opacity: .7; min-width: 24px; }
+.tnf-step-text { font-family: var(--font-display); font-size: 17px; font-weight: 400; color: var(--text); }
+
+/* Tracklist — the full grid */
+.tnf-tracklist {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--border); margin-top: 36px;
+}
+.tnf-track {
+  background: var(--bg); padding: 20px 24px;
+  display: flex; flex-direction: column; gap: 4px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .7s ease, transform .7s ease, background .3s;
+  cursor: default;
+}
+.tnf-track.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-track:nth-child(odd) { transition-delay: calc(var(--i, 0) * .05s); }
+.tnf-track:hover { background: var(--surface); }
+.tnf-track-name { font-family: var(--font-display); font-size: 18px; font-weight: 300; font-style: italic; color: var(--text); }
+.tnf-track-feat { font-family: var(--font-ui); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+
+/* Roles section — artist / curator / connector */
+.tnf-roles {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); margin-top: 36px;
+}
+.tnf-role {
+  background: var(--bg); padding: 36px 28px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .8s ease, transform .8s ease, background .3s;
+}
+.tnf-role.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-role:nth-child(1){transition-delay:.00s}.tnf-role:nth-child(2){transition-delay:.10s}.tnf-role:nth-child(3){transition-delay:.20s}
+.tnf-role:hover { background: var(--surface); }
+.tnf-role-num { font-family: var(--font-ui); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 12px; }
+.tnf-role-title { font-family: var(--font-display); font-size: 26px; font-weight: 300; font-style: italic; color: var(--text); display: block; margin-bottom: 12px; }
+.tnf-role-desc { font-size: 13px; line-height: 1.75; color: var(--text-mid); }
+
+/* Central quote */
+.tnf-moment {
+  padding: 100px 48px; border-top: 1px solid var(--border);
+  text-align: center; position: relative; overflow: hidden;
+}
+.tnf-moment::before {
+  content: '✦';
+  position: absolute; font-size: 260px; line-height: 1;
+  color: var(--text); opacity: .018;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none; user-select: none;
+}
+.tnf-moment-text {
+  font-family: var(--font-display); font-size: clamp(22px, 3.2vw, 46px);
+  font-weight: 300; font-style: italic; line-height: 1.4;
+  color: var(--text); max-width: 760px; margin: 0 auto 20px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+.tnf-moment-text.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-moment-attr { font-family: var(--font-ui); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); opacity: 0; transition: opacity 1s ease .3s; }
+.tnf-moment-attr.sl-visible { opacity: 1; }
+
+/* Closing */
+.tnf-closing {
+  padding: 160px 48px 120px; border-top: 1px solid var(--border);
+  text-align: center; position: relative; overflow: hidden;
+}
+.tnf-closing::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(200,169,110,.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+.tnf-closing-line {
+  display: block; font-family: var(--font-display); font-weight: 300; color: var(--text);
+  opacity: 0; transition: opacity 1.8s ease, transform 1.8s ease; transform: translateY(10px);
+}
+.tnf-closing-line.sl-visible { opacity: 1; transform: translateY(0); }
+.tnf-closing-line.large { font-size: clamp(40px, 6vw, 90px); line-height: .92; letter-spacing: -.025em; margin-bottom: .1em; }
+.tnf-closing-line.large em { font-style: italic; color: var(--accent); }
+.tnf-closing-line.small { font-family: var(--font-ui); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin-top: 48px; transition-delay: .35s; }
+
+body.light .tnf-spec  { background: var(--bg); }
+body.light .tnf-specs { background: var(--border); }
+body.light .tnf-step  { background: var(--bg); }
+body.light .tnf-track { background: var(--bg); }
+body.light .tnf-role  { background: var(--bg); }
+
+@media (max-width: 960px) {
+  .tnf-cover-wrap { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
+  .tnf-two-col    { grid-template-columns: 1fr; gap: 24px; }
+  .tnf-col-label  { position: static; }
+  .tnf-hero       { padding: calc(var(--nav-h) + 24px) 24px 48px; }
+  .tnf-stage      { left: 50%; top: 36%; width: 260px; height: 260px; }
+  .tnf-section    { padding: 72px 24px; }
+  .tnf-tracklist  { grid-template-columns: 1fr; }
+  .tnf-roles      { grid-template-columns: 1fr; }
+  .tnf-moment     { padding: 72px 24px; }
+  .tnf-closing    { padding: 100px 24px 80px; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <span class="preloader-name">Tuck and Friends</span>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="../../music.html" class="nav-logo">Young Tuck</a>
+  <div class="nav-right">
+    <button id="themeToggle" aria-label="Toggle theme">◐</button>
+    <button class="nav-menu-btn" id="menuBtn"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <nav class="menu-nav">
+    <a href="../../work.html"    class="menu-link" data-num="01">Work</a>
+    <a href="../../about.html"   class="menu-link" data-num="02">About</a>
+    <a href="../../music.html"   class="menu-link" data-num="03">Music</a>
+    <a href="../../contact.html" class="menu-link" data-num="04">Contact</a>
+  </nav>
+  <div class="menu-footer">
+    <span>tuckerdhoward@gmail.com</span>
+    <span>Pasadena, CA</span>
+  </div>
+</div>
+
+<!-- ═ HERO — THE CONSTELLATION ═ -->
+<section class="tnf-hero">
+  <div class="tnf-bg"></div>
+  <div class="tnf-stage">
+    <canvas class="tnf-canvas" id="tnfCanvas" width="320" height="320"></canvas>
+  </div>
+
+  <div class="tnf-eyebrow">
+    <span class="tnf-num">Album · 02</span>
+    <span>Collaborative Constellation</span>
+    <span>Young Tuck · Post-Transfer Era</span>
+  </div>
+  <h1 class="tnf-title">Tuck and<br><em>Friends</em></h1>
+  <p class="tnf-sub">Art doesn't grow in isolation. It expands through connection.</p>
+  <span class="tnf-scroll">Scroll to explore ↓</span>
+</section>
+
+<!-- ═ COVER + SPECS ═ -->
+<div class="tnf-cover-wrap">
+  <img src="../../images/tnf-album-cover.jpg" alt="Tuck and Friends album cover" class="tnf-cover-img sl-observe">
+  <div>
+    <span class="tnf-release-label sl-observe">Post-Transfer · Westmont College</span>
+    <h2 class="tnf-release-title sl-observe">A Collaborative<br><em>Constellation</em></h2>
+    <div class="tnf-specs">
+      <div class="tnf-spec sl-observe"><span class="tnf-spec-label">Format</span><span class="tnf-spec-value">Album</span></div>
+      <div class="tnf-spec sl-observe"><span class="tnf-spec-label">Era</span><span class="tnf-spec-value">Post-Transfer · Westmont</span></div>
+      <div class="tnf-spec sl-observe"><span class="tnf-spec-label">Status</span><span class="tnf-spec-value">Independent</span></div>
+      <div class="tnf-spec sl-observe"><span class="tnf-spec-label">Collaborators</span><span class="tnf-spec-value">13 artists</span></div>
+      <div class="tnf-spec sl-observe"><span class="tnf-spec-label">Recorded</span><span class="tnf-spec-value">Dorm rooms + remote exchange</span></div>
+    </div>
+    <a href="https://open.spotify.com/artist/7iIaFdQa6IeptZFeiQWg48" target="_blank" class="tnf-stream-link">
+      <span class="tnf-stream-line"></span>
+      <span>Stream on Spotify</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═ CHAPTER I ═ -->
+<div class="tnf-section">
+  <div class="tnf-two-col">
+    <div class="tnf-col-label sl-observe">
+      <span class="tnf-col-num">Chapter I</span>
+      <span class="tnf-col-name">The<br>Moment</span>
+    </div>
+    <div>
+      <span class="tnf-section-eyebrow sl-observe">Origin</span>
+      <h2 class="tnf-section-headline sl-observe">Belmont had the rhythm.<br>Westmont had the silence.<br><em>The album bridged them.</em></h2>
+      <div class="tnf-body sl-observe">
+        <p>Belmont University in Nashville had introduced the rhythm of daily creative exchange — writing sessions, shows, spontaneous studio time, the feeling that music existed everywhere. Transferring to Westmont College in California created an unexpected void.</p>
+        <p>The solution was not to wait for a community to appear but to build one intentionally. Tuck and Friends emerged as an active response: reach outward, invite participation, and create the environment that was missing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER II — COLLABORATION AS METHOD ═ -->
+<div class="tnf-section">
+  <div class="tnf-two-col">
+    <div class="tnf-col-label sl-observe">
+      <span class="tnf-col-num">Chapter II</span>
+      <span class="tnf-col-name">Collaboration<br>as Method</span>
+    </div>
+    <div>
+      <span class="tnf-section-eyebrow sl-observe">The Process</span>
+      <h2 class="tnf-section-headline sl-observe">Every song designed<br><em>specifically for the featured artist.</em></h2>
+      <div class="tnf-body sl-observe">
+        <p>Rather than assembling pre-existing tracks and adding guest verses, Young Tuck approached each collaborator as a co-author from the start. Production, arrangement, and tonal palette were tailored to complement their strengths and stylistic identity.</p>
+      </div>
+      <div class="tnf-workflow">
+        <div class="tnf-step sl-observe"><span class="tnf-step-num">01</span><span class="tnf-step-text">Produce a track with a specific collaborator in mind</span></div>
+        <div class="tnf-step sl-observe"><span class="tnf-step-num">02</span><span class="tnf-step-text">Record an initial verse or chorus as a foundation</span></div>
+        <div class="tnf-step sl-observe"><span class="tnf-step-num">03</span><span class="tnf-step-text">Send the piece to the artist for their contribution</span></div>
+        <div class="tnf-step sl-observe"><span class="tnf-step-num">04</span><span class="tnf-step-text">Receive their take — verses, hooks, or full reinterpretations</span></div>
+        <div class="tnf-step sl-observe"><span class="tnf-step-num">05</span><span class="tnf-step-text">Integrate into a final composition and sequence</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER III — TRACKLIST ═ -->
+<div class="tnf-section">
+  <div class="tnf-two-col">
+    <div class="tnf-col-label sl-observe">
+      <span class="tnf-col-num">Chapter III</span>
+      <span class="tnf-col-name">The<br>Tracklist</span>
+    </div>
+    <div>
+      <span class="tnf-section-eyebrow sl-observe">13 Collaborations</span>
+      <h2 class="tnf-section-headline sl-observe">A sonic map of<br><em>overlapping micro-scenes.</em></h2>
+      <div class="tnf-tracklist">
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">saturday</span><span class="tnf-track-feat">ft. sherif XR</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">I know</span><span class="tnf-track-feat">ft. scruff</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Seams</span><span class="tnf-track-feat">ft. Kate Ironside</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Guacamole</span><span class="tnf-track-feat">ft. reef</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">High</span><span class="tnf-track-feat">ft. bigbabygucci</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Dead ends</span><span class="tnf-track-feat">ft. surf</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Unstable interlude</span><span class="tnf-track-feat">ft. aria</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Matrix</span><span class="tnf-track-feat">ft. sunbath</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Shoulda been there</span><span class="tnf-track-feat">ft. jaydes</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Orbit</span><span class="tnf-track-feat">ft. $id Tha Kid</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Runaway</span><span class="tnf-track-feat">ft. Mikayla & Tsuyunoshi</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Yah!</span><span class="tnf-track-feat">ft. Xetonyl</span></div>
+        <div class="tnf-track sl-observe"><span class="tnf-track-name">Like that</span><span class="tnf-track-feat">ft. Loser</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER IV — FROM ARTIST TO CURATOR ═ -->
+<div class="tnf-section">
+  <div class="tnf-two-col">
+    <div class="tnf-col-label sl-observe">
+      <span class="tnf-col-num">Chapter IV</span>
+      <span class="tnf-col-name">Three<br>Roles</span>
+    </div>
+    <div>
+      <span class="tnf-section-eyebrow sl-observe">Identity Shift</span>
+      <h2 class="tnf-section-headline sl-observe">No longer only a performer.<br><em>Now also an organizer.</em></h2>
+      <div class="tnf-roles">
+        <div class="tnf-role sl-observe">
+          <span class="tnf-role-num">Role 01</span>
+          <span class="tnf-role-title">Artist</span>
+          <p class="tnf-role-desc">Writing, producing, and performing at the center of each track. The creative foundation everything else orbits.</p>
+        </div>
+        <div class="tnf-role sl-observe">
+          <span class="tnf-role-num">Role 02</span>
+          <span class="tnf-role-title">Curator</span>
+          <p class="tnf-role-desc">Selecting voices, shaping sequences, and assembling disparate talents into a coherent whole without institutional backing.</p>
+        </div>
+        <div class="tnf-role sl-observe">
+          <span class="tnf-role-num">Role 03</span>
+          <span class="tnf-role-title">Connector</span>
+          <p class="tnf-role-desc">Each collaborator brought their own audience. Tracks circulated across multiple networks simultaneously — organic expansion through genuine relationships.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CHAPTER V — PRODUCTION CONTEXT ═ -->
+<div class="tnf-section">
+  <div class="tnf-two-col">
+    <div class="tnf-col-label sl-observe">
+      <span class="tnf-col-num">Chapter V</span>
+      <span class="tnf-col-name">Production<br>Context</span>
+    </div>
+    <div>
+      <span class="tnf-section-eyebrow sl-observe">Where It Was Made</span>
+      <h2 class="tnf-section-headline sl-observe">Physical proximity was no longer<br><em>required for creative proximity.</em></h2>
+      <div class="tnf-body sl-observe">
+        <p>Despite its scope — 13 tracks, 13+ artists — the album was recorded using modest resources: dorm room sessions at Westmont College, campus music facilities on lower campus, and remote file exchange with collaborators across the country.</p>
+        <p>The contrast between humble production environments and expansive collaboration highlights the democratizing power of digital music workflows. A single dorm room became a multi-artist hub.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═ CENTRAL MOMENT ═ -->
+<div class="tnf-moment">
+  <p class="tnf-moment-text sl-observe">"Leadership in art can manifest quietly — by <em>enabling others to shine.</em>"</p>
+  <span class="tnf-moment-attr sl-observe">Tuck and Friends · Young Tuck</span>
+</div>
+
+<!-- ═ LEGACY ═ -->
+<div class="tnf-section">
+  <span class="tnf-section-eyebrow sl-observe">Legacy</span>
+  <h2 class="tnf-section-headline sl-observe">Community can be constructed<br><em>intentionally — one invitation at a time.</em></h2>
+  <div class="tnf-body sl-observe">
+    <p>Tuck and Friends established a comfort initiating large-scale collaborations, the ability to adapt production style to diverse voices, and a reputation as a connector within creative communities. It demonstrated that curatorial instincts have real value — that organizing a network is itself an artistic act.</p>
+    <p>The emotional opposite of all that came before: outward-facing, socially energized, and built on the premise that creativity thrives through dialogue rather than monologue.</p>
+  </div>
+</div>
+
+<!-- ═ CLOSING ═ -->
+<div class="tnf-closing">
+  <span class="tnf-closing-line large sl-observe">Together.</span>
+  <span class="tnf-closing-line large sl-observe" style="transition-delay:.12s"><em>Always better</em></span>
+  <span class="tnf-closing-line large sl-observe" style="transition-delay:.24s">together.</span>
+  <span class="tnf-closing-line small sl-observe" style="transition-delay:.5s">Tuck and Friends · Young Tuck</span>
+</div>
+
+<div class="cs-next">
+  <a href="../../music.html" class="cs-next-link">
+    <span class="cs-next-label">Young Tuck</span>
+    <span class="cs-next-title">← Back to discography</span>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-name">Tucker Dane Howard</span>
+    <span class="footer-copy">©2025</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/7iIaFdQa6IeptZFeiQWg48?si=vxg0Gci8SCGDvpIVlgX4wg" target="_blank">Spotify</a>
+    <a href="https://music.apple.com/us/artist/young-tuck/1453296484" target="_blank">Apple Music</a>
+    <a href="https://www.linkedin.com/in/tucker-dane-howard-62709329a/" target="_blank">LinkedIn</a>
+    <a href="mailto:tuckerdhoward@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script>
+/* ── CONSTELLATION ANIMATION ── */
+(function() {
+  const canvas = document.getElementById('tnfCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+
+  // Color palette — matches the comic art: warm tones
+  const palette = [
+    'rgba(200,169,110,',  // gold — Young Tuck center
+    'rgba(220,140,100,',  // warm orange
+    'rgba(160,190,140,',  // muted green
+    'rgba(150,160,210,',  // soft blue
+    'rgba(210,150,160,',  // rose
+    'rgba(180,200,160,',  // sage
+    'rgba(200,180,130,',  // sand
+  ];
+
+  // 13 collaborator nodes + 1 center
+  const nodeCount = 14;
+  const nodes = [];
+
+  // Place nodes: center first, then radiating outward
+  // Center = Young Tuck
+  nodes.push({ x: cx, y: cy, r: 5, color: palette[0], label: 'YT', delay: 0, opacity: 0, connections: [] });
+
+  // Radial positions — hand-spaced to feel organic, not perfectly geometric
+  const positions = [
+    { a: 0,    d: 90  },
+    { a: 28,   d: 108 },
+    { a: 62,   d: 82  },
+    { a: 95,   d: 105 },
+    { a: 130,  d: 88  },
+    { a: 155,  d: 110 },
+    { a: 185,  d: 92  },
+    { a: 215,  d: 107 },
+    { a: 242,  d: 85  },
+    { a: 272,  d: 100 },
+    { a: 300,  d: 90  },
+    { a: 325,  d: 112 },
+    { a: 348,  d: 88  },
+  ];
+
+  positions.forEach((p, i) => {
+    const rad = (p.a * Math.PI) / 180;
+    nodes.push({
+      x: cx + Math.cos(rad) * p.d,
+      y: cy + Math.sin(rad) * p.d,
+      r: 3 + Math.random() * 1.5,
+      color: palette[(i + 1) % palette.length],
+      delay: 800 + i * 220,
+      opacity: 0,
+      arrived: false,
+      pulsePhase: Math.random() * Math.PI * 2,
+    });
+  });
+
+  // Connection pairs — each satellite connects back to center + a couple neighbors
+  const connectionPairs = [
+    [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11],[0,12],[0,13],
+    [1,2],[2,3],[4,5],[6,7],[8,9],[10,11],[12,13],[3,4],[7,8],[11,12],
+  ];
+
+  let startTime = null;
+  const duration = 600; // per node fade-in
+
+  function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function draw(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Update opacities
+    nodes.forEach((n, i) => {
+      if (i === 0) { n.opacity = Math.min(1, elapsed / duration); return; }
+      const t = Math.max(0, elapsed - n.delay);
+      n.opacity = Math.min(1, ease(Math.min(1, t / duration)));
+    });
+
+    const time = timestamp / 1000;
+
+    // Draw connections
+    connectionPairs.forEach(([a, b]) => {
+      const na = nodes[a], nb = nodes[b];
+      const alpha = Math.min(na.opacity, nb.opacity) * 0.18;
+      if (alpha < 0.01) return;
+      ctx.beginPath();
+      ctx.moveTo(na.x, na.y);
+      ctx.lineTo(nb.x, nb.y);
+      ctx.strokeStyle = `rgba(200,169,110,${alpha})`;
+      ctx.lineWidth = .8;
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach((n, i) => {
+      if (n.opacity < 0.01) return;
+      const pulse = i === 0
+        ? 1 + Math.sin(time * 1.8) * 0.2
+        : 1 + Math.sin(time * 1.2 + (n.pulsePhase || 0)) * 0.15;
+      const r = n.r * pulse;
+
+      // Glow
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
+      grad.addColorStop(0, n.color + (n.opacity * 0.35) + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color + n.opacity + ')';
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  // Start after hero arrives
+  setTimeout(() => requestAnimationFrame(draw), 1400);
+})();
+
+/* ── SCROLL REVEAL ── */
+(function() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('sl-visible'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.sl-observe').forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>
