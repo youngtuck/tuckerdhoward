@@ -289,160 +289,140 @@
 <section class="cs-hero" style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--bg);">
 
 <style>
-/* Apple Hero — Minimal outline apple, leaf rotates, light traces the bite */
-.ap-hero-bg {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 50% 48%, rgba(200,169,110,.04) 0%, transparent 65%);
-  animation: ap-breathe 10s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes ap-breathe {
-  0%,100% { opacity:.5; transform:scale(1); }
-  50%      { opacity:1;  transform:scale(1.05); }
+/* ── APPLE BRAND SYSTEM ── */
+
+/* Page-wide silver/white accent — Apple's clean monochrome */
+.cs-hero ~ * { --accent: #e8e8e8; --accent-dim: rgba(232,232,232,.08); }
+/* Keep section numbers and key text legible */
+.cs-hero ~ * .section-num { color: rgba(232,232,232,.5); }
+
+.ap-bg {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 55% 60% at 69% 46%, rgba(255,255,255,.03) 0%, transparent 65%);
+  pointer-events:none;
 }
 
+/* Animation — right side */
 .ap-axis {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -58%);
-  width: 260px; height: 280px;
-  opacity: 0;
-  animation: ap-arrive 2.4s var(--ease) 1s forwards;
+  position:absolute;
+  top:50%; left:69%;
+  transform:translate(-50%,-54%);
+  width:260px; height:280px;
+  opacity:0;
+  animation:ap-arrive 2.4s var(--ease) .8s forwards;
 }
 @keyframes ap-arrive {
-  from { opacity:0; transform:translate(-50%,-58%) scale(.9); }
-  to   { opacity:1; transform:translate(-50%,-58%) scale(1); }
+  from { opacity:0; transform:translate(-50%,-54%) scale(.9); }
+  to   { opacity:1; transform:translate(-50%,-54%) scale(1); }
 }
 
-/* Apple shape — SVG-based outline */
-.ap-apple-svg {
-  width: 100%; height: 100%;
-  overflow: visible;
-}
-.ap-body {
-  fill: none;
-  stroke: rgba(200,169,110,.35);
-  stroke-width: 1;
-  stroke-dasharray: 700;
-  stroke-dashoffset: 700;
-  animation: ap-draw 2.8s var(--ease) 1.2s forwards;
-}
-@keyframes ap-draw {
-  to { stroke-dashoffset: 0; }
-}
-
-.ap-leaf {
-  fill: none;
-  stroke: rgba(200,169,110,.5);
-  stroke-width: 1;
-  stroke-dasharray: 120;
-  stroke-dashoffset: 120;
-  transform-origin: 50% 15%;
-  animation: ap-draw-leaf 1.2s var(--ease) 2.8s forwards,
-             ap-leaf-sway 8s ease-in-out 4s infinite;
-}
-@keyframes ap-draw-leaf { to { stroke-dashoffset: 0; } }
-@keyframes ap-leaf-sway {
-  0%,100% { transform: rotate(0deg); }
-  50%      { transform: rotate(-6deg); }
-}
-
-/* Light trace — follows the curve */
-.ap-trace {
-  fill: none;
-  stroke: rgba(200,169,110,.7);
-  stroke-width: 1.5;
-  stroke-dasharray: 80 620;
-  stroke-dashoffset: 0;
-  animation: ap-trace-move 4s ease-in-out 3.5s infinite;
-  opacity: 0;
-  animation-delay: 3.5s;
-}
-@keyframes ap-trace-move {
-  0%   { stroke-dashoffset: 0;    opacity: 0; }
-  5%   { opacity: 1; }
-  95%  { opacity: 1; }
-  100% { stroke-dashoffset: -700; opacity: 0; }
-}
-
-/* Center dot */
-.ap-dot {
-  position: absolute;
-  width: 5px; height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  top: 65%; left: 50%;
-  transform: translate(-50%,-50%);
-  opacity: 0;
-  animation: ap-dot-in 1s ease 3.8s forwards;
-  box-shadow: 0 0 12px rgba(200,169,110,.4);
-}
-@keyframes ap-dot-in { to { opacity: 1; } }
-
-/* Outer ring — very subtle, slow */
+/* Outer orbit ring */
 .ap-ring {
-  position: absolute;
-  inset: -20px;
-  border: 1px solid rgba(200,169,110,.07);
-  border-radius: 50%;
-  animation: ap-ring-rotate 30s linear infinite;
+  position:absolute; inset:-24px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:50%;
+  animation:ap-ring-spin 32s linear infinite;
 }
-@keyframes ap-ring-rotate { to { transform: rotate(360deg); } }
-.ap-ring::before, .ap-ring::after {
-  content: ''; position: absolute;
-  background: rgba(200,169,110,.3);
-}
-.ap-ring::before { width: 6px; height: 1px; top: 50%; left: -3px; transform: translateY(-50%); }
-.ap-ring::after  { width: 6px; height: 1px; top: 50%; right: -3px; transform: translateY(-50%); }
+@keyframes ap-ring-spin { to { transform:rotate(360deg); } }
+.ap-ring::before,.ap-ring::after { content:''; position:absolute; background:rgba(255,255,255,.2); }
+.ap-ring::before { width:6px; height:1px; top:50%; left:-3px; transform:translateY(-50%); }
+.ap-ring::after  { width:6px; height:1px; top:50%; right:-3px; transform:translateY(-50%); }
 
-/* Bottom fade */
-.cs-hero::after {
-  content: '';
-  position: absolute; left:0; right:0; bottom:0;
-  height: 280px;
-  background: linear-gradient(to bottom, transparent, var(--bg));
-  pointer-events: none;
-  z-index: 1;
+/* Apple SVG */
+.ap-svg { width:100%; height:100%; overflow:visible; }
+
+/* Rainbow body — draws itself */
+.ap-body {
+  fill:none;
+  stroke:url(#apRainbow);
+  stroke-width:1.2;
+  stroke-linecap:round;
+  stroke-dasharray:700;
+  stroke-dashoffset:700;
+  animation:ap-draw 2.8s ease .9s forwards;
+  opacity:.85;
 }
+@keyframes ap-draw { to { stroke-dashoffset:0; } }
+
+/* Leaf — fresh green, draws then sways */
+.ap-leaf {
+  fill:none;
+  stroke:rgba(100,210,80,.75);
+  stroke-width:1.2;
+  stroke-linecap:round;
+  stroke-dasharray:120;
+  stroke-dashoffset:120;
+  animation:ap-leaf-draw 1s ease 2.8s forwards, ap-leaf-sway 8s ease-in-out 4s infinite;
+  transform-origin:100px 42px;
+}
+@keyframes ap-leaf-draw { to { stroke-dashoffset:0; } }
+@keyframes ap-leaf-sway {
+  0%,100% { transform:rotate(0deg); }
+  50%      { transform:rotate(-7deg); }
+}
+
+/* Light trace chases the outline */
+.ap-trace {
+  fill:none;
+  stroke:rgba(255,255,255,.9);
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-dasharray:70 630;
+  stroke-dashoffset:0;
+  opacity:0;
+  animation:ap-trace 4.5s ease-in-out 3.8s infinite;
+}
+@keyframes ap-trace {
+  0%   { stroke-dashoffset:0;    opacity:0; }
+  6%   { opacity:1; }
+  94%  { opacity:1; }
+  100% { stroke-dashoffset:-700; opacity:0; }
+}
+
+/* Center dot — white */
+.ap-dot {
+  position:absolute; width:5px; height:5px;
+  background:#fff; border-radius:50%;
+  top:65%; left:50%; transform:translate(-50%,-50%);
+  opacity:0;
+  animation:ap-dot-in 1s ease 3.8s forwards;
+  box-shadow:0 0 10px rgba(255,255,255,.5);
+}
+@keyframes ap-dot-in { to { opacity:1; } }
+
+.cs-hero::after {
+  content:''; position:absolute; left:0; right:0; bottom:0; height:300px;
+  background:linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events:none; z-index:1;
+}
+.cs-hero-content { max-width:55%; }
 </style>
 
-  <div class="ap-hero-bg"></div>
-
+  <div class="ap-bg"></div>
   <div class="ap-axis">
     <div class="ap-ring"></div>
-    <!-- Apple silhouette as SVG path — minimal outline -->
-    <svg class="ap-apple-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+    <svg class="ap-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="apRainbow" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stop-color="#ff5f57"/>
+          <stop offset="18%"  stop-color="#ff9f0a"/>
+          <stop offset="36%"  stop-color="#ffd60a"/>
+          <stop offset="54%"  stop-color="#30d158"/>
+          <stop offset="72%"  stop-color="#32ade6"/>
+          <stop offset="100%" stop-color="#bf5af2"/>
+        </linearGradient>
+      </defs>
       <!-- Leaf -->
-      <path class="ap-leaf" d="M100 38 C100 38 108 18 124 14 C124 14 118 32 100 38 Z"/>
-      <!-- Apple body — classic apple silhouette, outline only -->
-      <path class="ap-body" d="
-        M100 52
-        C78 52 58 62 48 80
-        C36 100 36 122 44 142
-        C52 162 64 178 80 184
-        C88 187 96 184 100 184
-        C104 184 112 187 120 184
-        C136 178 148 162 156 142
-        C164 122 164 100 152 80
-        C142 62 122 52 100 52 Z
-      "/>
-      <!-- Bite trace overlay -->
-      <path class="ap-trace" d="
-        M100 52
-        C78 52 58 62 48 80
-        C36 100 36 122 44 142
-        C52 162 64 178 80 184
-        C88 187 96 184 100 184
-        C104 184 112 187 120 184
-        C136 178 148 162 156 142
-        C164 122 164 100 152 80
-        C142 62 122 52 100 52 Z
-      "/>
+      <path class="ap-leaf" d="M100 46 C100 46 110 24 128 18 C128 18 120 36 100 46 Z"/>
+      <!-- Apple body -->
+      <path class="ap-body" d="M100 58 C76 58 54 70 44 90 C32 112 33 138 42 160 C51 182 64 196 80 200 C89 203 97 200 100 200 C103 200 111 203 120 200 C136 196 149 182 158 160 C167 138 168 112 156 90 C146 70 124 58 100 58 Z"/>
+      <!-- Trace overlay -->
+      <path class="ap-trace" d="M100 58 C76 58 54 70 44 90 C32 112 33 138 42 160 C51 182 64 196 80 200 C89 203 97 200 100 200 C103 200 111 203 120 200 C136 196 149 182 158 160 C167 138 168 112 156 90 C146 70 124 58 100 58 Z"/>
     </svg>
     <div class="ap-dot"></div>
   </div>
 
-  <div class="cs-hero-content" style="position:relative;z-index:2;">
+  <div class="cs-hero-content" style="position:relative;z-index:2;padding:0 48px 64px;">
     <div class="cs-eyebrow">
       <span class="section-num">03</span>
       <span>Product Vision Study · Creative Direction</span>

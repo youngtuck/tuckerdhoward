@@ -340,6 +340,7 @@
   .meta-stats { grid-template-columns: 1fr; }
   .spec-grid { grid-template-columns: 1fr; }
 }
+
 </style>
 </head>
 <body>
@@ -382,184 +383,140 @@
 <section class="meta-hero" style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--bg);">
 
 <style>
-/* Meta Hero — Infinity loop, drawn by stroke, then breathes */
-.mt-hero-bg {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(0,133,255,.04) 0%, transparent 65%);
-  animation: mt-breathe 9s ease-in-out infinite;
-  pointer-events: none;
+/* ── META BRAND SYSTEM ── */
+
+/* Page-wide Meta blue accent */
+.meta-hero ~ * { --accent: #1877f2; --accent-dim: rgba(24,119,242,.1); }
+
+.mt-bg {
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 55% at 69% 48%, rgba(24,119,242,.06) 0%, transparent 65%);
+  animation:mt-breathe 9s ease-in-out infinite;
+  pointer-events:none;
 }
 @keyframes mt-breathe {
-  0%,100% { opacity:.5; transform:scale(1); }
-  50%      { opacity:1;  transform:scale(1.07); }
+  0%,100% { opacity:.6; transform:scale(1); }
+  50%      { opacity:1;  transform:scale(1.06); }
 }
 
+/* Animation — right side, never touches text */
 .mt-axis {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -56%);
-  width: 340px; height: 200px;
-  opacity: 0;
-  animation: mt-arrive 2.2s var(--ease) 1s forwards;
+  position:absolute;
+  top:50%; left:69%;
+  transform:translate(-50%,-52%);
+  width:340px; height:200px;
+  opacity:0;
+  animation:mt-arrive 2.2s var(--ease) .8s forwards;
 }
 @keyframes mt-arrive {
-  from { opacity:0; transform:translate(-50%,-56%) scale(.88); }
-  to   { opacity:1; transform:translate(-50%,-56%) scale(1); }
+  from { opacity:0; transform:translate(-50%,-52%) scale(.88); }
+  to   { opacity:1; transform:translate(-50%,-52%) scale(1); }
 }
 
-/* Outer orbit ring */
+/* Orbit ring */
 .mt-orbit {
-  position: absolute;
-  inset: -50px;
-  border: 1px solid rgba(200,169,110,.06);
-  border-radius: 50%;
-  animation: mt-orbit-spin 40s linear infinite;
+  position:absolute; inset:-50px;
+  border:1px solid rgba(24,119,242,.08);
+  border-radius:50%;
+  animation:mt-orbit-spin 40s linear infinite;
 }
 .mt-orbit::before {
-  content: '';
-  position: absolute;
-  width: 6px; height: 1px;
-  background: rgba(200,169,110,.3);
-  top: 50%; left: -3px; transform: translateY(-50%);
+  content:''; position:absolute;
+  width:6px; height:1px; background:rgba(24,119,242,.35);
+  top:50%; left:-3px; transform:translateY(-50%);
 }
+@keyframes mt-orbit-spin { to { transform:rotate(360deg); } }
 
-@keyframes mt-orbit-spin { to { transform: rotate(360deg); } }
+/* Infinity SVG */
+.mt-svg { width:100%; height:100%; overflow:visible; }
 
-/* The infinity loop — SVG */
-.mt-infinity-svg {
-  width: 100%; height: 100%;
-  overflow: visible;
+/* Echo — inner shadow loop */
+.mt-echo {
+  fill:none;
+  stroke:rgba(24,119,242,.12);
+  stroke-width:1;
+  stroke-dasharray:900; stroke-dashoffset:900;
+  transform:scale(.72); transform-origin:170px 100px;
+  animation:mt-draw 3.6s ease 1.4s forwards;
 }
-
-/* Main loop — draws itself */
+/* Main loop — blue, draws itself */
 .mt-loop {
-  fill: none;
-  stroke: rgba(200,169,110,.4);
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: mt-draw 3s var(--ease) 1.2s forwards;
+  fill:none;
+  stroke:rgba(24,119,242,.55);
+  stroke-width:1.4;
+  stroke-linecap:round;
+  stroke-dasharray:900; stroke-dashoffset:900;
+  animation:mt-draw 2.8s ease 1s forwards;
 }
-@keyframes mt-draw { to { stroke-dashoffset: 0; } }
+@keyframes mt-draw { to { stroke-dashoffset:0; } }
 
-/* Glow trace — chases around the loop */
+/* Bright trace chases the loop */
 .mt-trace {
-  fill: none;
-  stroke: rgba(200,169,110,.8);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 60 840;
-  stroke-dashoffset: 0;
-  animation: mt-trace-chase 5s ease-in-out 4s infinite;
-  opacity: 0;
+  fill:none;
+  stroke:#4fa3ff;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-dasharray:70 830;
+  stroke-dashoffset:0;
+  opacity:0;
+  animation:mt-trace-chase 5s ease-in-out 3.8s infinite;
 }
 @keyframes mt-trace-chase {
-  0%   { stroke-dashoffset: 0;    opacity: 0; }
-  8%   { opacity: 1; }
-  92%  { opacity: 1; }
-  100% { stroke-dashoffset: -900; opacity: 0; }
+  0%   { stroke-dashoffset:0;    opacity:0; }
+  7%   { opacity:1; }
+  93%  { opacity:1; }
+  100% { stroke-dashoffset:-900; opacity:0; }
 }
 
-/* Inner echo loop — same path, smaller, slower */
-.mt-echo {
-  fill: none;
-  stroke: rgba(200,169,110,.1);
-  stroke-width: 1;
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: mt-draw 3.6s var(--ease) 1.6s forwards;
-  transform: scale(.72);
-  transform-origin: center;
-}
-
-/* Center crosspoint dot */
+/* Center crosspoint */
 .mt-center {
-  position: absolute;
-  width: 6px; height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  opacity: 0;
-  animation: mt-dot-arrive 1s ease 3.8s forwards;
-  box-shadow: 0 0 14px rgba(200,169,110,.5);
-  animation-fill-mode: forwards;
+  position:absolute; width:7px; height:7px;
+  background:#1877f2; border-radius:50%;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  opacity:0;
+  animation:mt-dot-arrive 1s ease 3.8s forwards;
+  box-shadow:0 0 16px rgba(24,119,242,.6);
 }
-@keyframes mt-dot-arrive {
-  to { opacity: 1; }
+@keyframes mt-dot-arrive { to { opacity:1; } }
+
+.meta-hero::after {
+  content:''; position:absolute; left:0; right:0; bottom:0; height:300px;
+  background:linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events:none; z-index:1;
 }
 
-/* Bottom fade */
-.meta-hero::after {
-  content: '';
-  position: absolute; left:0; right:0; bottom:0;
-  height: 280px;
-  background: linear-gradient(to bottom, transparent, var(--bg));
-  pointer-events: none;
-  z-index: 1;
-}
+/* Eyebrow & NDA badge */
+.meta-hero-eyebrow { position:relative; z-index:2; }
+.meta-hero-title   { position:relative; z-index:2; }
+.meta-hero-sub     { position:relative; z-index:2; max-width:55%; }
+.meta-hero-nda     { position:absolute; top:calc(var(--nav-h) + 24px); right:48px; z-index:2; }
 </style>
 
-  <div class="mt-hero-bg"></div>
-  <div class="meta-hero-nda" style="position:absolute;top:calc(var(--nav-h) + 24px);right:48px;z-index:2;">Work under NDA</div>
-
+  <div class="mt-bg"></div>
   <div class="mt-axis">
     <div class="mt-orbit"></div>
-    <svg class="mt-infinity-svg" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
-      <!--
-        Meta infinity loop — the ∞ symbol, traced as a continuous path.
-        Two overlapping circles connected at the center crosspoint.
-      -->
-      <path class="mt-echo" d="
-        M170,100
-        C170,100 200,50 240,50
-        C280,50 310,75 310,100
-        C310,125 280,150 240,150
-        C200,150 170,100 170,100
-        C170,100 140,50 100,50
-        C60,50 30,75 30,100
-        C30,125 60,150 100,150
-        C140,150 170,100 170,100 Z
-      "/>
-      <path class="mt-loop" d="
-        M170,100
-        C170,100 200,50 240,50
-        C280,50 310,75 310,100
-        C310,125 280,150 240,150
-        C200,150 170,100 170,100
-        C170,100 140,50 100,50
-        C60,50 30,75 30,100
-        C30,125 60,150 100,150
-        C140,150 170,100 170,100 Z
-      "/>
-      <path class="mt-trace" d="
-        M170,100
-        C170,100 200,50 240,50
-        C280,50 310,75 310,100
-        C310,125 280,150 240,150
-        C200,150 170,100 170,100
-        C170,100 140,50 100,50
-        C60,50 30,75 30,100
-        C30,125 60,150 100,150
-        C140,150 170,100 170,100 Z
-      "/>
+    <svg class="mt-svg" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+      <path class="mt-echo" d="M170,100 C170,100 200,50 240,50 C280,50 310,75 310,100 C310,125 280,150 240,150 C200,150 170,100 170,100 C170,100 140,50 100,50 C60,50 30,75 30,100 C30,125 60,150 100,150 C140,150 170,100 170,100 Z"/>
+      <path class="mt-loop"  d="M170,100 C170,100 200,50 240,50 C280,50 310,75 310,100 C310,125 280,150 240,150 C200,150 170,100 170,100 C170,100 140,50 100,50 C60,50 30,75 30,100 C30,125 60,150 100,150 C140,150 170,100 170,100 Z"/>
+      <path class="mt-trace" d="M170,100 C170,100 200,50 240,50 C280,50 310,75 310,100 C310,125 280,150 240,150 C200,150 170,100 170,100 C170,100 140,50 100,50 C60,50 30,75 30,100 C30,125 60,150 100,150 C140,150 170,100 170,100 Z"/>
     </svg>
     <div class="mt-center"></div>
   </div>
 
-  <div class="meta-hero-eyebrow" style="position:relative;z-index:2;">
+  <div class="meta-hero-nda">Work under NDA</div>
+
+  <div class="meta-hero-eyebrow" style="padding:0 48px;">
     <span>04</span>
     <span>AI Model Designer · Level 2</span>
     <span>2025–2026</span>
   </div>
 
-  <h1 class="meta-hero-title" style="position:relative;z-index:2;">
+  <h1 class="meta-hero-title" style="padding:0 48px 0;">
     Meta<br>
     <em>AI Model Design</em>
   </h1>
 
-  <p class="meta-hero-sub" style="position:relative;z-index:2;">
+  <p class="meta-hero-sub" style="padding:0 48px 64px;">
     Evaluating and refining AI-generated visual outputs at industrial scale on the Human Behavior and Ads Creative team. Prompt engineering, visual quality assurance, and brand integrity across global advertising production.
   </p>
 </section>
