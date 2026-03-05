@@ -461,8 +461,48 @@
       Modern music production workflows rely almost entirely on asynchronous file exchange — sessions exported, uploaded, downloaded, imported, and re-exported through cloud storage and email. Every handoff is a friction point. Every time zone difference is a delay. Creative momentum dies in the gap.
     </p>
 
-    <img src="../../images/apple-problem.jpg" alt="Professional music production is increasingly remote" class="slide-full">
-    <p class="slide-caption">Current reality — the broken loop that Shared Sessions solves</p>
+    <!-- Broken loop diagram -->
+    <div style="border:1px solid var(--border); background:var(--surface); padding:48px 40px;">
+      <p style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;">Current Reality — The Broken Loop</p>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <!-- Loop nodes -->
+        <div style="display:grid;grid-template-columns:1fr 48px 1fr 48px 1fr 48px 1fr;align-items:center;gap:0;">
+          <div style="background:var(--surface2);border:1px solid var(--border);padding:20px 18px;text-align:center;">
+            <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Producer A</p>
+            <p style="font-family:var(--font-display);font-size:16px;font-weight:300;color:var(--text);">Finishes stems</p>
+          </div>
+          <div style="text-align:center;">
+            <span style="font-size:18px;color:var(--border-mid);">→</span>
+          </div>
+          <div style="background:var(--surface2);border:1px solid rgba(200,80,80,0.25);padding:20px 18px;text-align:center;">
+            <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,100,100,0.7);margin-bottom:8px;">Friction Point</p>
+            <p style="font-family:var(--font-display);font-size:16px;font-weight:300;color:var(--text);">Export · Upload</p>
+          </div>
+          <div style="text-align:center;">
+            <span style="font-size:18px;color:var(--border-mid);">→</span>
+          </div>
+          <div style="background:var(--surface2);border:1px solid rgba(200,80,80,0.25);padding:20px 18px;text-align:center;">
+            <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,100,100,0.7);margin-bottom:8px;">Friction Point</p>
+            <p style="font-family:var(--font-display);font-size:16px;font-weight:300;color:var(--text);">Download · Import</p>
+          </div>
+          <div style="text-align:center;">
+            <span style="font-size:18px;color:var(--border-mid);">→</span>
+          </div>
+          <div style="background:var(--surface2);border:1px solid var(--border);padding:20px 18px;text-align:center;">
+            <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Producer B</p>
+            <p style="font-family:var(--font-display);font-size:16px;font-weight:300;color:var(--text);">Hours later</p>
+          </div>
+        </div>
+        <div style="margin-top:24px;padding:20px 24px;background:rgba(200,80,80,0.06);border:1px solid rgba(200,80,80,0.18);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(220,100,100,0.7);">Cost per handoff</span>
+          <div style="display:flex;gap:32px;flex-wrap:wrap;">
+            <span style="font-size:12px;color:var(--text-mid);">⊘ &nbsp;Creative momentum lost</span>
+            <span style="font-size:12px;color:var(--text-mid);">⊘ &nbsp;Version conflicts</span>
+            <span style="font-size:12px;color:var(--text-mid);">⊘ &nbsp;Time zone delays</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="problem-solution">
       <div class="ps-panel">
@@ -508,8 +548,82 @@
       Shared Sessions transforms Logic Pro into a shared studio environment. Multiple producers, engineers, and artists can compose, record, and produce in the same project simultaneously — from anywhere in the world. Secure by design, built for professionals, requiring no change to existing workflow.
     </p>
 
-    <img src="../../images/apple-shared-sessions.jpg" alt="Shared Sessions — real-time collaborative environment" class="slide-full">
-    <p class="slide-caption">Shared Sessions — the feature as designed</p>
+    <!-- Shared Sessions — native UI concept -->
+    <div style="border:1px solid var(--border);background:#0a0a0f;overflow:hidden;">
+      <div style="background:#111118;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,90,90,0.65);"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,190,50,0.65);"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:rgba(60,200,80,0.65);"></div>
+        </div>
+        <p style="font-size:10px;letter-spacing:.12em;color:var(--text-dim);text-transform:uppercase;">Logic Pro — Shared Sessions</p>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(100,160,255,0.08);border:1px solid rgba(100,160,255,0.22);padding:5px 14px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:rgba(100,220,100,0.85);display:inline-block;"></span>
+          <span style="font-size:9px;letter-spacing:.12em;color:rgba(100,160,255,0.85);text-transform:uppercase;">Session Live</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:170px 1fr;">
+        <div style="border-right:1px solid var(--border);">
+          <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <div style="width:22px;height:22px;border-radius:50%;background:rgba(100,160,255,0.2);border:1px solid rgba(100,160,255,0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:9px;color:rgba(100,160,255,0.9);">T</span></div>
+            <div><p style="font-size:10px;color:var(--text);margin-bottom:2px;">Drums</p><p style="font-size:9px;color:rgba(100,160,255,0.6);">Tucker</p></div>
+          </div>
+          <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;">
+            <div style="width:22px;height:22px;border-radius:50%;background:rgba(100,160,255,0.2);border:1px solid rgba(100,160,255,0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:9px;color:rgba(100,160,255,0.9);">T</span></div>
+            <div><p style="font-size:10px;color:var(--text);margin-bottom:2px;">Bass</p><p style="font-size:9px;color:rgba(100,160,255,0.6);">Tucker</p></div>
+          </div>
+          <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;background:rgba(180,120,255,0.04);">
+            <div style="width:22px;height:22px;border-radius:50%;background:rgba(180,120,255,0.2);border:1px solid rgba(180,120,255,0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:9px;color:rgba(180,120,255,0.9);">K</span></div>
+            <div><p style="font-size:10px;color:var(--text);margin-bottom:2px;">Melody</p><p style="font-size:9px;color:rgba(180,120,255,0.7);">Koi · Live</p></div>
+          </div>
+          <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;background:rgba(180,120,255,0.04);">
+            <div style="width:22px;height:22px;border-radius:50%;background:rgba(180,120,255,0.2);border:1px solid rgba(180,120,255,0.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:9px;color:rgba(180,120,255,0.9);">K</span></div>
+            <div><p style="font-size:10px;color:var(--text);margin-bottom:2px;">Vocals</p><p style="font-size:9px;color:rgba(180,120,255,0.7);">Recording…</p></div>
+          </div>
+          <div style="padding:10px 14px;display:flex;align-items:center;gap:10px;">
+            <div style="width:22px;height:22px;border-radius:50%;background:rgba(100,200,160,0.15);border:1px solid rgba(100,200,160,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:9px;color:rgba(100,200,160,0.9);">M</span></div>
+            <div><p style="font-size:10px;color:var(--text);margin-bottom:2px;">Mix Bus</p><p style="font-size:9px;color:rgba(100,200,160,0.6);">Shared</p></div>
+          </div>
+        </div>
+        <div>
+          <div style="height:42px;border-bottom:1px solid rgba(255,255,255,0.05);padding:7px 10px;display:flex;align-items:center;gap:2px;">
+            <div style="flex:1;height:28px;background:rgba(100,160,255,0.07);border:1px solid rgba(100,160,255,0.14);display:flex;align-items:center;padding:0 8px;gap:2px;overflow:hidden;">
+              <div style="width:3px;height:55%;background:rgba(100,160,255,0.45);"></div><div style="width:2px;height:90%;background:rgba(100,160,255,0.38);"></div><div style="width:3px;height:40%;background:rgba(100,160,255,0.45);"></div><div style="width:2px;height:80%;background:rgba(100,160,255,0.38);"></div><div style="width:3px;height:65%;background:rgba(100,160,255,0.45);"></div><div style="width:2px;height:100%;background:rgba(100,160,255,0.38);"></div><div style="width:3px;height:45%;background:rgba(100,160,255,0.45);"></div><div style="width:2px;height:70%;background:rgba(100,160,255,0.38);"></div><div style="width:3px;height:85%;background:rgba(100,160,255,0.45);"></div><div style="width:2px;height:40%;background:rgba(100,160,255,0.38);"></div><div style="width:3px;height:55%;background:rgba(100,160,255,0.45);"></div><div style="width:2px;height:95%;background:rgba(100,160,255,0.38);"></div>
+            </div>
+          </div>
+          <div style="height:42px;border-bottom:1px solid rgba(255,255,255,0.05);padding:7px 10px;display:flex;align-items:center;">
+            <div style="flex:1;height:28px;background:rgba(100,160,255,0.07);border:1px solid rgba(100,160,255,0.14);display:flex;align-items:center;padding:0 8px;gap:4px;overflow:hidden;">
+              <div style="width:38px;height:65%;background:rgba(100,160,255,0.32);"></div><div style="width:6px;"></div><div style="width:44px;height:75%;background:rgba(100,160,255,0.32);"></div><div style="width:8px;"></div><div style="width:40px;height:60%;background:rgba(100,160,255,0.32);"></div>
+            </div>
+          </div>
+          <div style="height:42px;border-bottom:1px solid rgba(255,255,255,0.05);padding:7px 10px;display:flex;align-items:center;background:rgba(180,120,255,0.04);">
+            <div style="flex:1;height:28px;background:rgba(180,120,255,0.09);border:1px solid rgba(180,120,255,0.22);display:flex;align-items:center;padding:0 8px;gap:3px;overflow:hidden;">
+              <div style="width:28px;height:55%;background:rgba(180,120,255,0.45);"></div><div style="width:4px;"></div><div style="width:34px;height:80%;background:rgba(180,120,255,0.45);"></div><div style="width:4px;"></div><div style="width:26px;height:60%;background:rgba(180,120,255,0.45);"></div><div style="width:4px;"></div><div style="width:18px;height:90%;background:rgba(180,120,255,0.6);"></div>
+              <div style="width:2px;height:110%;background:rgba(180,120,255,0.9);margin-left:3px;"></div>
+            </div>
+          </div>
+          <div style="height:42px;border-bottom:1px solid rgba(255,255,255,0.05);padding:7px 10px;display:flex;align-items:center;background:rgba(180,120,255,0.04);">
+            <div style="flex:1;height:28px;background:rgba(180,120,255,0.05);border:1px dashed rgba(180,120,255,0.2);display:flex;align-items:center;padding:0 12px;gap:8px;">
+              <span style="width:6px;height:6px;border-radius:50%;background:rgba(220,80,80,0.8);display:inline-block;"></span>
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(180,120,255,0.55);">Recording…</span>
+            </div>
+          </div>
+          <div style="height:42px;padding:7px 10px;display:flex;align-items:center;">
+            <div style="flex:1;height:28px;background:rgba(100,200,160,0.05);border:1px solid rgba(100,200,160,0.14);display:flex;align-items:center;padding:0 8px;gap:2px;overflow:hidden;">
+              <div style="width:3px;height:50%;background:rgba(100,200,160,0.38);"></div><div style="width:2px;height:85%;background:rgba(100,200,160,0.32);"></div><div style="width:3px;height:65%;background:rgba(100,200,160,0.38);"></div><div style="width:2px;height:90%;background:rgba(100,200,160,0.32);"></div><div style="width:3px;height:55%;background:rgba(100,200,160,0.38);"></div><div style="width:2px;height:75%;background:rgba(100,200,160,0.32);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#111118;border-top:1px solid var(--border);padding:8px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+          <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);">3 collaborators</span>
+          <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);">Latency 12ms</span>
+          <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);">End-to-end encrypted</span>
+        </div>
+        <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(100,160,255,0.45);">Shared Sessions · Concept UI</span>
+      </div>
+    </div>
 
     <div class="spec-grid" style="background:var(--border);">
       <div class="spec-item">
@@ -542,9 +656,31 @@
       WWDC is where Apple introduces paradigm shifts — not incremental updates. Shared Sessions belongs there because it reframes what Logic Pro fundamentally is: not a solo production tool, but a shared creative environment. The messaging strategy positions the feature as the natural next step in Logic's 30-year evolution.
     </p>
 
-    <!-- WWDC visual — the keynote moment -->
-    <div style="border: 1px solid var(--border); overflow:hidden; position:relative;">
-      <img src="../../images/apple-hero.png" alt="Logic Pro — Shared Sessions feature reveal" style="width:100%; display:block; filter:brightness(.9) saturate(.9);">
+    <!-- WWDC Keynote moment — native concept -->
+    <div style="background:#000;border:1px solid var(--border);overflow:hidden;padding:64px 48px;display:flex;flex-direction:column;align-items:center;gap:40px;">
+      <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(100,160,255,0.5);">WWDC · Logic Pro</p>
+      <div style="text-align:center;">
+        <p style="font-family:var(--font-display);font-size:clamp(36px,6vw,72px);font-weight:300;color:#fff;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;">Shared Sessions</p>
+        <p style="font-family:var(--font-display);font-size:clamp(16px,2.5vw,22px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.45);letter-spacing:.02em;">Produce together. From anywhere.</p>
+      </div>
+      <div style="display:flex;gap:48px;flex-wrap:wrap;justify-content:center;">
+        <div style="text-align:center;">
+          <p style="font-family:var(--font-display);font-size:32px;font-weight:300;color:rgba(100,160,255,0.85);margin-bottom:6px;">Real-time</p>
+          <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);">Collaboration</p>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.1);"></div>
+        <div style="text-align:center;">
+          <p style="font-family:var(--font-display);font-size:32px;font-weight:300;color:rgba(100,160,255,0.85);margin-bottom:6px;">Zero</p>
+          <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);">Workflow change</p>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.1);"></div>
+        <div style="text-align:center;">
+          <p style="font-family:var(--font-display);font-size:32px;font-weight:300;color:rgba(100,160,255,0.85);margin-bottom:6px;">Native</p>
+          <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);">Apple design</p>
+        </div>
+      </div>
+      <div style="width:100%;max-width:400px;height:1px;background:linear-gradient(to right,transparent,rgba(100,160,255,0.3),transparent);"></div>
+      <p style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);">Available in Logic Pro · Concept</p>
     </div>
 
     <div class="phases">
